@@ -3,20 +3,70 @@
 
 <head>
     <title>Characterize</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-</head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Entire bundle -->
+      <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
 
-<body>
-    <div></div>
-    <div>
-        <div></div>
-    </div>
-    <div>
-        <div></div>
-        <div></div>
-    </div>
-    <div></div>
-</body>
+      <!-- legacy bundle for older browsers (IE11) -->
+      <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.legacy.js"></script>
 
+      <!-- Draggable only -->
+      <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.js"></script>
+
+      <!-- Sortable only -->
+      <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/sortable.js"></script>
+
+      <!-- Droppable only -->
+      <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/droppable.js"></script>
+
+      <!-- Swappable only -->
+      <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/swappable.js"></script>
+
+      <!-- Plugins only -->
+      <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/plugins.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.2/lib/draggable.min.js"></script>
+      
+      <link href = "style.css" rel = "stylesheet" type = "text/css">
+      <style>
+
+		</style>
+	</head>
+	<body>
+      
+      <div class="block">
+         <div class="droppable">
+         </div>
+      </div>
+
+      <div class="grid">
+         <div class="block">
+            <div class="droppable draggable-dropzone--occupied">
+               <div class="draggable">
+                  Yes <input type="checkbox" name="userInput" size=10 value="">
+                   
+               </div>
+            </div>
+         </div>
+      
+         <div class="block">
+            <div class="droppable">
+ 
+
+            </div>
+         </div>
+      </div>
+      User Input Box: <input type="text" name="textBox1" size="10">
+	</body>
+	<script type="text/javascript">
+   const containers = document.querySelectorAll('.block')
+
+const droppable = new Draggable.Droppable(containers, {
+  draggable: '.draggable',
+  droppable: '.droppable'
+});
+
+droppable.on('drag:start', () => console.log('drag:start'));
+droppable.on('droppable:over', () => console.log('droppable:over'));
+droppable.on('droppable:out', () => console.log('droppable:out'));
+	</script>
 </html>
