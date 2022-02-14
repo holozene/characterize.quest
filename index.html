@@ -1,15 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Characterize</title>
-    <link rel="icon" type="image/png" href="characterize.png"></icon>
-    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="characterize.png" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/draggable.bundle.js"></script>
-    <link href="style.css" rel="stylesheet" type="text/css">
+    <script src="script.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="grid.css" rel="stylesheet" type="text/css" />
   </head>
 
-  <body>
+  <body onload="main()">
     <div class="sheet-main container">
       <div class="dropzone"></div>
       <div class="dropzone"></div>
@@ -92,63 +94,61 @@
       <div class="dropzone"></div>
       <div class="dropzone"></div>
     </div>
-      <div class="component-menu container">
-        <div class="dropzone draggable-dropzone--occupied">
-          <div class="component">
-            ??? <input type="dropbtn" name="userInput" size=10 value="">
-            <div class="handle"></div>
-          </div>
-        </div>
-        <div class="dropzone draggable-dropzone--occupied">
-          <div class="component col2">
-            Yes <input type="checkbox" name="userInput" size=10 value="">
-            <div class="handle"></div>
-          </div>
-        </div>
-        <div class="dropzone draggable-dropzone--occupied">
-          <div class="component col3">
-            No <input type="dropbtn" name="userInput" size=10 value="">
-            <div class="handle"></div>
-          </div>
-        </div>
-        <div class="dropzone draggable-dropzone--occupied">
-          <div class="component col4">
-            perhaps <input type="dropbtn" name="userInput" size=10 value="">
-            <div class="handle"></div>
-          </div>
-        </div>
-        <div class="dropzone draggable-dropzone--occupied">
-          <div class="component col5">
-            good chance <input type="dropbtn" name="userInput" size=10 value="">
-            <div class="handle"></div>
-          </div>
-        </div>
-        <div class="dropzone draggable-dropzone--occupied">
-          <div class="component col6">
-            Maybe <input type="dropbtn" name="userInput" size=10 value="">
-            <div class="handle"></div>
-          </div>
-        </div>
-        <div class="dropzone draggable-dropzone--occupied">
-          <div class="component col7">
-            idk <input type="dropbtn" name="userInput" size=10 value="">
-            <div class="handle"></div>
-          </div>
-        </div>
-        <div class="dropzone draggable-dropzone--occupied">
-          <div class="component col8 row3">
-            whatever you think <input type="dropbtn" name="userInput" size=10 value="">
-            <div class="handle"></div>
-          </div>
+    <div class="component-menu container">
+      <div class="dropzone draggable-dropzone--occupied">
+        <div class="component">
+          ??? <input type="text" name="userInput" size="10" value="" />
+          <div class="handle"></div>
         </div>
       </div>
+      <div class="dropzone draggable-dropzone--occupied">
+        <div class="component">
+          ??? <input type="checkbox" name="userInput" size="10" value="" />
+          <div class="handle"></div>
+        </div>
+      </div>
+      <div class="dropzone draggable-dropzone--occupied">
+        <div class="component col2">
+          Yes <input type="checkbox" name="userInput" size="10" value="" />
+          <div class="handle"></div>
+        </div>
+      </div>
+      <div class="dropzone draggable-dropzone--occupied">
+        <div class="component col3">
+          No <input type="dropbtn" name="userInput" size="10" value="" />
+          <div class="handle"></div>
+        </div>
+      </div>
+      <div class="dropzone draggable-dropzone--occupied">
+        <div class="component col4">
+          perhaps <input type="dropbtn" name="userInput" size="10" value="" />
+          <div class="handle"></div>
+        </div>
+      </div>
+      <div class="dropzone draggable-dropzone--occupied">
+        <div class="component col5">
+          good chance <input type="dropbtn" name="userInput" size="10" value="" />
+          <div class="handle"></div>
+        </div>
+      </div>
+      <div class="dropzone draggable-dropzone--occupied">
+        <div class="component col6">
+          Maybe <input type="dropbtn" name="userInput" size="10" value="" />
+          <div class="handle"></div>
+        </div>
+      </div>
+      <div class="dropzone draggable-dropzone--occupied">
+        <div class="component col7">
+          idk <input type="dropbtn" name="userInput" size="10" value="" />
+          <div class="handle"></div>
+        </div>
+      </div>
+      <div class="dropzone draggable-dropzone--occupied">
+        <div class="component col8 row3">
+          whatever you think <input type="dropbtn" name="userInput" size="10" value="" />
+          <div class="handle"></div>
+        </div>
+      </div>
+    </div>
   </body>
-  <script type="text/javascript">
-    const droppable = new Draggable.Droppable(
-      document.querySelectorAll(".container"), {
-      dropzone: ".dropzone",
-      draggable: ".component",
-      handle: ".handle",
-    });
-  </script>
 </html>
