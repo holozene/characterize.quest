@@ -6,6 +6,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/draggable.bundle.js"></script>
+    <script src="Component.js"></script>
+    <script src="Character.js"></script>
     <script src="script.js"></script>
     <link href="style.css" rel="stylesheet" type="text/css" />
     <link href="grid.css" rel="stylesheet" type="text/css" />
@@ -94,10 +96,10 @@
       <div class="dropzone"></div>
       <div class="dropzone"></div>
     </div>
-    <div class="component-menu container">
+    <div id="componentMenu" class="component-menu container">
       <div class="dropzone draggable-dropzone--occupied">
         <div class="component">
-          ??? <input type="text" name="userInput" size="10" value="" />
+          ??? <input type="text" name="userInput" size="10" value="" onchange="update()" />
           <div class="handle"></div>
         </div>
       </div>
@@ -144,7 +146,7 @@
         </div>
       </div>
       <div class="dropzone draggable-dropzone--occupied">
-        <div class="component col8 row3">
+        <div class="component col8">
           whatever you think <input type="dropbtn" name="userInput" size="10" value="" />
           <div class="handle"></div>
         </div>
