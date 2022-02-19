@@ -10,146 +10,27 @@
     <script src="Character.js"></script>
     <script src="script.js"></script>
     <link href="style.css" rel="stylesheet" type="text/css" />
-    <link href="grid.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body onload="main()">
-    <div class="sheet-main container">
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
-      <div class="dropzone"></div>
+    <div id="topBar" class="bar">
+      <img
+        class="bar-item"
+        src="characterize.png"
+        width="23"
+        height="23"
+        style="border-radius: 3px"
+      />
+      <div class="bar-item">Characterize</div>
     </div>
-    <div id="componentMenu" class="component-menu container">
-      <div class="dropzone draggable-dropzone--occupied">
-        <div class="component">
-          ??? <input type="text" name="userInput" size="10" value="" onchange="update()" />
-          <div class="handle"></div>
-        </div>
-      </div>
-      <div class="dropzone draggable-dropzone--occupied">
-        <div class="component">
-          ??? <input type="checkbox" name="userInput" size="10" value="" />
-          <div class="handle"></div>
-        </div>
-      </div>
-      <div class="dropzone draggable-dropzone--occupied">
-        <div class="component col2">
-          Yes <input type="checkbox" name="userInput" size="10" value="" />
-          <div class="handle"></div>
-        </div>
-      </div>
-      <div class="dropzone draggable-dropzone--occupied">
-        <div class="component col3">
-          No <input type="dropbtn" name="userInput" size="10" value="" />
-          <div class="handle"></div>
-        </div>
-      </div>
-      <div class="dropzone draggable-dropzone--occupied">
-        <div class="component col4">
-          perhaps <input type="dropbtn" name="userInput" size="10" value="" />
-          <div class="handle"></div>
-        </div>
-      </div>
-      <div class="dropzone draggable-dropzone--occupied">
-        <div class="component col5">
-          good chance <input type="dropbtn" name="userInput" size="10" value="" />
-          <div class="handle"></div>
-        </div>
-      </div>
-      <div class="dropzone draggable-dropzone--occupied">
-        <div class="component col6">
-          Maybe <input type="dropbtn" name="userInput" size="10" value="" />
-          <div class="handle"></div>
-        </div>
-      </div>
-      <div class="dropzone draggable-dropzone--occupied">
-        <div class="component col7">
-          idk <input type="dropbtn" name="userInput" size="10" value="" />
-          <div class="handle"></div>
-        </div>
-      </div>
-      <div class="dropzone draggable-dropzone--occupied">
-        <div class="component col8">
-          whatever you think <input type="dropbtn" name="userInput" size="10" value="" />
-          <div class="handle"></div>
-        </div>
+    <div class="width-scroller"></div>
+    <div id="sheetMain" class="sheet-main container">
+      <!--Sheet dropzones and components will be generated here-->
+    </div>
+    <div class="component-menu">
+      <div class="menu-top"></div>
+      <div id="componentMenu" class="container menu-container">
+        <!--Component options will be generated here-->
       </div>
     </div>
   </body>
