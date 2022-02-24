@@ -176,7 +176,13 @@
 }
 
 input {
-  width: 90%;
+   min-width: 200px;
+   display: inline-block;
+   font-size: 22px;
+}
+
+input:focus {
+   background-color: lightblue;
 }
 
 input[type="text"] {
