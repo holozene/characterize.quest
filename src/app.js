@@ -88,7 +88,7 @@ const menuComponents = [
   new comp.Component("roll damage", 15, 2, [new comp.Item(), new comp.Item()]),
   new comp.Component("date", 7, 22, [new comp.Item(), new comp.Item()]),
 ];
-menuComponents.forEach(element => element.generateHTML());
+menuComponents.forEach(element => element.spawn());
 
 const droppable = new Draggable.Droppable(document.querySelectorAll(".container"), {
   dropzone: ".dropzone",
@@ -109,7 +109,7 @@ droppable.on("droppable:stop", evt => {
     evt.data.dragEvent.data.sourceContainer.id == "componentMenu" &&
     evt.data.dropzone.classList[1] != "menu-zone"
   ) {
-    comp.Component.findById(evt.data.dragEvent.data.source.classList[1], menuComponents).generateHTML(1);
+    comp.Component.findById(evt.data.dragEvent.data.source.classList[1], menuComponents).respawn();
   }
   if (evt.data.dropzone.id == "trash") {
     console.log(evt.data.dragEvent.data.source.id);
