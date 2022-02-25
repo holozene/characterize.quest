@@ -10,7 +10,26 @@ export class Component {
     this.items = items;
   }
 
-  generateHTML(respawn) {
+  spawn() {
+    const component = this.generateComponent();
+    const zone = this.genElemIC(
+      "div",
+      "drop" + this.id,
+      "dropzone menu-zone draggable-dropzone--occupied"
+    );
+    zone.style.height = this.unitsToPixels(this.height);
+    zone.appendChild(component);
+    document.getElementById("componentMenu").appendChild(zone);
+  }
+
+  respawn() {
+    const zone = document.getElementById("drop" + this.id);
+    zone.classList.add("draggable-dropzone--occupied");
+    // console.log(zone.classList);
+    zone.appendChild(this.generateComponent());
+  }
+
+  generateComponent() {
     const component = this.genElemIC(
       "div",
       (Component.uniqueIdCounter++).toString(),
@@ -24,23 +43,9 @@ export class Component {
       this.items.forEach(item => {
         component.appendChild(item.generate());
       });
-    component.appendChild(this.genElemH("div", "&ensp;" + Component.uniqueIdCounter.toString()));
+    // component.appendChild(this.genElemH("div", "&ensp;" + Component.uniqueIdCounter.toString()));
     // component.appendChild(this.genElemA("input", "type", this.type));
-    if (respawn) {
-      const zone = document.getElementById("drop" + this.id);
-      zone.classList.add("draggable-dropzone--occupied");
-      // console.log(zone.classList);
-      zone.appendChild(component);
-    } else {
-      const zone = this.genElemIC(
-        "div",
-        "drop" + this.id,
-        "dropzone menu-zone draggable-dropzone--occupied"
-      );
-      zone.style.height = this.unitsToPixels(this.height);
-      zone.appendChild(component);
-      document.getElementById("componentMenu").appendChild(zone);
-    }
+    return component;
   }
 
   static delete(uniqueId) {
