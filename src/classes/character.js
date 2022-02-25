@@ -1,10 +1,7 @@
 class Class {
-  id;
-  name;
-  level;
-  subClassid;
-  hitDice;
-  getHitDice() {}
+  constructor(name, level, subClassid, hitDice, getHitDice) {
+    id;
+  }
 }
 
 class Equipment {}
@@ -14,9 +11,7 @@ class Equipment {}
 // const halfProf = Symbol(d2);
 
 class Skill {
-  name;
-  attribute;
-  prof;
+  constructor(name, attribute, prof) {}
 
   getBonus() {}
 }
@@ -24,33 +19,33 @@ class Skill {
 class Proficency {}
 
 class Character {
-  charName = "";
-  playerName = "";
-  str = 10;
-  dex = 10;
-  con = 10;
-  int = 10;
-  wis = 10;
-  cha = 10;
-  classes = new Array(Class);
-  skills = new Array(Skill);
-  weaponProf;
-  armorProf;
-  toolProf;
-  languageProf;
-  equipment;
-  maxHP;
-  curHP;
-  deathSave;
-  walkSpd;
-  flySpd;
-  swimSpd;
-  climbSpd;
-  inspiration;
-  exhaustion;
-  notes;
-
-  Character() {}
+  constructor(
+    charName = "",
+    playerName = "",
+    str = 10,
+    dex = 10,
+    con = 10,
+    int = 10,
+    wis = 10,
+    cha = 10,
+    classes,
+    skills,
+    weaponProf,
+    armorProf,
+    toolProf,
+    languageProf,
+    equipment,
+    maxHP,
+    curHP,
+    deathSave,
+    walkSpd,
+    flySpd,
+    swimSpd,
+    climbSpd,
+    inspiration,
+    exhaustion,
+    notes
+  ) {}
 
   addClass() {}
 
@@ -64,7 +59,7 @@ class Character {
 
   getProfBonus() {
     let highest = 0;
-    classes.array.forEach(element => {
+    this.classes.forEach(element => {
       highest = element.level > highest ? element.level : highest;
     });
     return 2 + Math.floor((highest - 1) / 4);
