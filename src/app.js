@@ -51,10 +51,9 @@ query MyQuery {
 }
 */
 
-const trash = new Image();
-trash.src = Trash;
-trash.className = "trashimg";
-document.getElementById("trash").appendChild(trash);
+// const trash = new Image();
+// trash.src = Trash;
+// trash.className = "trashimg";
 
 // generate dropzones
 for (let i = 0; i < 17 * 22; i++) {
@@ -65,6 +64,7 @@ for (let i = 0; i < 17 * 22; i++) {
 const bottom = document.createElement("div");
 bottom.setAttribute("style", "width: 1003px; background-color: #d6ccb9;");
 document.getElementById("sheetMain").appendChild(bottom);
+document.getElementById("sheetMain").setAttribute("style", "background-color: grey;");
 
 /* todo:
  * connect to db
