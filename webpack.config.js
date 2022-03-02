@@ -43,7 +43,6 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: ["index.html"],
     }),
-    new webpack.HotModuleReplacementPlugin(),
   ],
 };
 
