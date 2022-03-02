@@ -18,9 +18,9 @@ class Skill {
 
 class Proficency {}
 
-class Character {
+export class Character {
   constructor(
-    charName = "",
+    charName = "Default",
     playerName = "",
     str = 10,
     dex = 10,
@@ -42,10 +42,50 @@ class Character {
     flySpd,
     swimSpd,
     climbSpd,
-    inspiration,
+    inspiration = false,
     exhaustion,
     notes
-  ) {}
+  ) {
+    this.charName = charName;
+    this.playerName = playerName;
+    this.str = str;
+    this.dex = dex;
+    this.con = con;
+    this.int = int;
+    this.wis = wis;
+    this.cha = cha;
+    this.classes = classes;
+    this.skills = skills;
+    this.weaponProf = weaponProf;
+    this.armorProf = armorProf;
+    this.toolProf = toolProf;
+    this.languageProf = languageProf;
+    this.equipment = equipment;
+    this.maxHP = maxHP;
+    this.curHP = curHP;
+    this.deathSave = deathSave;
+    this.walkSpd = walkSpd;
+    this.flySpd = flySpd;
+    this.swimSpd = swimSpd;
+    this.climbSpd = climbSpd;
+    this.inspiration = inspiration;
+    this.exhaustion = exhaustion;
+    this.notes = notes;
+  }
+
+  setVal(variable, value) {
+    character[variable] = value;
+    document
+      .querySelectorAll("." + variable)
+      .forEach(elem => (elem.value = character[variable]));
+  }
+
+  setBool(variable, value) {
+    character[variable] = value;
+    document
+      .querySelectorAll("." + variable)
+      .forEach(elem => (elem.checked = character[variable]));
+  }
 
   addClass() {}
 
@@ -89,3 +129,5 @@ class Character {
     return;
   }
 }
+
+export let character = new Character();
