@@ -1,3 +1,5 @@
+import * as c from "./character";
+
 export class Component {
   static idCounter = 0;
   static uniqueIdCounter = 0;
@@ -37,7 +39,6 @@ export class Component {
     );
     component.style.height = this.unitsToPixels(this.height);
     component.style.width = this.unitsToPixels(this.width);
-
     component.appendChild(this.genElemC("div", "handle"));
     if (this.items)
       this.items.forEach(item => {
@@ -133,8 +134,22 @@ export class Input extends Item {
       `position: absolute; width: ${this.x}px; height: ${this.height}px; left: ${this.x}px; top: ${this.y}px; ${this.extraStyle}`
     );
     elem.setAttribute("type", this.type);
-    // elem.setAttribute()
+    if (this.type == "text") {
+      elem.value = c.character[this.variable];
+    } else if (this.type == "checkbox") {
+      elem.checked = c.character[this.variable];
+    }
+    elem.className = this.variable;
+    elem.addEventListener("change", this.input);
     return elem;
+  }
+
+  input() {
+    if (this.type == "text") {
+      c.character.setVal(this.className, this.value);
+    } else if (this.type == "checkbox") {
+      c.character.setBool(this.className, this.checked);
+    }
   }
 }
 
@@ -152,7 +167,6 @@ export class Output extends Item {
       `position: absolute; width: ${this.x}px; height: ${this.height}px; left: ${this.x}px; top: ${this.y}px; ${this.extraStyle}`
     );
     elem.setAttribute("type", this.type);
-    // elem.setAttribute()
     return elem;
   }
 }

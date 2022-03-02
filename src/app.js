@@ -1,5 +1,6 @@
 import Amplify from "aws-amplify";
 import * as comp from "./classes/component";
+import * as char from "./classes/character";
 import Icon from "../assets/characterize.png";
 import Trash from "../assets/trash.png";
 import * as Draggable from "@shopify/draggable";
@@ -79,7 +80,7 @@ document.getElementById("sheetMain").setAttribute("style", "background-color: gr
 // menuComponents.forEach(element => element.generateMenu(db.components.element));
 const menuComponents = [
   new comp.Component("Character Name", 5, 2, [
-    new comp.Input(20, 0, 10, 30, "proficency", "button", "", "background-color: firebrick;"),
+    new comp.Input(20, 0, 10, 30, "inspiration", "checkbox", "", "background-color: firebrick;"),
     new comp.Input(50, 5, 60, 10, "charName", "text", "", "background-color: firebrick;"),
     new comp.Item(20, 40, 10, 30, "div", "button", "border: 3px double indianred; border-radius: 5px;"),
   ]),
