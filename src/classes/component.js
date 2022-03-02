@@ -1,42 +1,56 @@
-class Component {
-  static idCounter = 0;
+import * as c from "./character";
 
-  constructor(text, type, width, height, items) {
+export class Component {
+  static idCounter = 0;
+  static uniqueIdCounter = 0;
+
+  constructor(name, width, height, items) {
     this.id = (Component.idCounter++).toString();
-    this.text = text;
-    this.type = type;
+    this.name = name;
     this.width = width;
     this.height = height;
     this.items = items;
   }
 
-  generateHTML(isNew) {
-    const component = this.genElemIC("div", this.id, "component");
+  spawn() {
+    const component = this.generateComponent();
+    const zone = this.genElemIC(
+      "div",
+      "drop" + this.id,
+      "dropzone menu-zone draggable-dropzone--occupied"
+    );
+    zone.style.height = this.unitsToPixels(this.height);
+    zone.appendChild(component);
+    document.getElementById("componentMenu").appendChild(zone);
+  }
+
+  respawn() {
+    const zone = document.getElementById("drop" + this.id);
+    zone.classList.add("draggable-dropzone--occupied");
+    // console.log(zone.classList);
+    zone.appendChild(this.generateComponent());
+  }
+
+  generateComponent() {
+    const component = this.genElemIC(
+      "div",
+      (Component.uniqueIdCounter++).toString(),
+      "component " + this.id
+    );
     component.style.height = this.unitsToPixels(this.height);
     component.style.width = this.unitsToPixels(this.width);
-
     component.appendChild(this.genElemC("div", "handle"));
     if (this.items)
       this.items.forEach(item => {
         component.appendChild(item.generate());
       });
-    // component.appendChild(this.genElemH("div", "&ensp;" + this.text));
+    // component.appendChild(this.genElemH("div", "&ensp;" + Component.uniqueIdCounter.toString()));
     // component.appendChild(this.genElemA("input", "type", this.type));
-    if (isNew) {
-      const zone = document.getElementById("drop" + this.id);
-      zone.classList.add("draggable-dropzone--occupied");
-      console.log("isNew", component, zone)
-      zone.appendChild(component);
-    } else {
-      const zone = this.genElemIC(
-        "div",
-        "drop" + this.id,
-        "dropzone menu-zone draggable-dropzone--occupied"
-      );
-      zone.style.height = this.unitsToPixels(this.height);
-      zone.appendChild(component);
-      document.getElementById("componentMenu").appendChild(zone);
-    }
+    return component;
+  }
+
+  static delete(uniqueId) {
+    //delete from db
   }
 
   genElemC(tag, className) {
@@ -75,6 +89,8 @@ class Component {
   unitsToPixels(units) {
     return 54 + (units - 1) * 59 + "px";
   }
+  //54
+  //113
 
   static findById(id, componentArray) {
     let component = componentArray.find(component => component.id == id);
@@ -82,8 +98,8 @@ class Component {
   }
 }
 
-class Item {
-  constructor(x = 0, y = 0, width = 0, height = 10, tag = "div", content = "hah", extraStyle = "") {
+export class Item {
+  constructor(x = 0, y = 0, width = 0, height = 10, tag = "div", content = "", extraStyle = "") {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -104,9 +120,10 @@ class Item {
   }
 }
 
-class Input extends Item {
-  constructor(x, y, width, height, type = "text", content, extraStyle) {
+export class Input extends Item {
+  constructor(x, y, width, height, variable, type = "text", content, extraStyle) {
     super(x, y, width, height, undefined, content, extraStyle);
+    this.variable = variable;
     this.type = type;
   }
 
@@ -117,7 +134,39 @@ class Input extends Item {
       `position: absolute; width: ${this.x}px; height: ${this.height}px; left: ${this.x}px; top: ${this.y}px; ${this.extraStyle}`
     );
     elem.setAttribute("type", this.type);
-    // elem.setAttribute()
+    if (this.type == "text") {
+      elem.value = c.character[this.variable];
+    } else if (this.type == "checkbox") {
+      elem.checked = c.character[this.variable];
+    }
+    elem.className = this.variable;
+    elem.addEventListener("change", this.input);
+    return elem;
+  }
+
+  input() {
+    if (this.type == "text") {
+      c.character.setVal(this.className, this.value);
+    } else if (this.type == "checkbox") {
+      c.character.setBool(this.className, this.checked);
+    }
+  }
+}
+
+export class Output extends Item {
+  constructor(x, y, width, height, variable, type = "text", extraStyle) {
+    super(x, y, width, height, undefined, "", extraStyle);
+    this.variable = variable;
+    this.type = type;
+  }
+
+  generate() {
+    const elem = document.createElement("div");
+    elem.setAttribute(
+      "style",
+      `position: absolute; width: ${this.x}px; height: ${this.height}px; left: ${this.x}px; top: ${this.y}px; ${this.extraStyle}`
+    );
+    elem.setAttribute("type", this.type);
     return elem;
   }
 }

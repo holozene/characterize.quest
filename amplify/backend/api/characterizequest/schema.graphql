@@ -1,0 +1,92 @@
+type ComponentOutput @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  x: String
+  y: String
+  width: String
+  height: String
+  tag: String
+  content: String
+  extraStyle: String
+  characterVariable: String
+  componentID: ID! @index(name: "byComponent")
+}
+
+type ComponentInput @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  x: Int
+  y: Int
+  width: Int
+  height: Int
+  tag: String
+  content: String
+  extraStyle: String
+  characterVariable: String
+  componentID: ID! @index(name: "byComponent")
+}
+
+type Component @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  width: Int
+  Inputs: [ComponentInput] @hasMany(indexName: "byComponent", fields: ["id"])
+  Outputs: [ComponentOutput] @hasMany(indexName: "byComponent", fields: ["id"])
+  height: Int
+}
+
+type SpellAccess @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  spell_id: ID
+  class_id: ID
+  subclass_id: ID
+  race_id: ID
+  level: Int
+}
+
+type Features @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  description: String
+  FeaturesByClasses: [FeaturesByClass] @hasMany(indexName: "byFeatures", fields: ["id"])
+}
+
+type FeaturesByClass @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  subclass_id: ID
+  feature_id: ID
+  featuresID: ID! @index(name: "byFeatures")
+}
+
+type Spells @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  spell_lvl: String
+  cast_time: String
+  range: String
+  verbal: Boolean
+  somatic: Boolean
+  material: String
+  duration: String
+  concentration: Boolean
+  school: String
+  description: String
+}
+
+enum Ability {
+  STRENGTH
+  DEXTERITY
+  CONSTITUTION
+  INTELLIGENCE
+  WISDOM
+  CHARISMA
+  ANY
+}
+
+type Classes @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  save_1: Ability
+  save_2: Ability
+  skill_no: Int
+  spellcasting: Boolean
+}
+ 

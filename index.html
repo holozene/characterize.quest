@@ -1,22 +1,255 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Characterize</title>
-    <link rel="icon" type="image/png" href="characterize.png" />
     <meta charset="utf-8" />
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'unsafe-inline'; script-src 'unsafe-inline'; style-src 'unsafe-inline';"
+    /> -->
+    <title>Characterize</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/draggable.bundle.js"></script>
-    <script src="Component.js"></script>
-    <script src="Character.js"></script>
-    <script src="script.js"></script>
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="7215eaf03d970c08f494.png" />
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/draggable.bundle.js"></script>
+    <script type="module" src="/src/classes/Character.js"></script>
+    <script type="module" src="/src/classes/Component.js"></script>
+    <link href="/src/style.css" rel="stylesheet" type="text/css" /> -->
+    <style>
+      :root {
+        --component-size: 54px;
+        --dropzone-size: 59px;
+        --menu-min: 200px;
+        --menu-mid: 300px;
+      }
+
+      html {
+        margin: 0px;
+        height: 0px;
+        width: 0px;
+        overflow-y: scroll;
+        scrollbar-color: indianred #aaa0;
+        scrollbar-width: medium;
+      }
+
+      body {
+        margin: 0px;
+        height: 0px;
+        width: 0px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: small;
+        color: #fff;
+        background-color: linen;
+      }
+
+      .window {
+        margin-top: 25px;
+        width: 100vw;
+        height: calc(100vh - 25px);
+      }
+
+      .bar {
+        position: fixed;
+        top: 0px;
+        display: flex;
+        flex-direction: row;
+        flex-basis: content;
+        max-height: 25px;
+        width: 100vw;
+        font-size: 15px;
+        align-items: center;
+        padding: 2px;
+        /* todo: improve this equation too */
+        padding-left: calc(50vw - 510px);
+        /*max(50vw - calc(505px + var(--menu-min)), 10px);*/
+        background-color: firebrick;
+        z-index: 3;
+      }
+
+      .width-scroller {
+        position: sticky;
+        width: calc(1050px + var(--menu-min));
+        /* todo: improve this equation too */
+        /* right: min(
+          min(var(--menu-min) - var(--menu-mid), 100vw - calc(1050 + var(--menu-min))) + 100vw,
+          0px
+        ); */
+        height: 1px;
+      }
+
+      .sheet-main {
+        /* position: absolute;
+        top: 35px; */
+        /* todo: improve this equation too */
+        /* right: max(calc(50vw - 510px), var(--menu-min)); */
+        /* margin-left: calc(min(10vw-calc(50vw - 510px), 10vw+10px) + calc(50vw - 510px)); */
+        /* calc(max(100vw - 510px, var(--menu-min)) + 5px);
+        right: max(calc(50vw - 510px), var(--menu-min));   */
+        width: 1002px;
+        height: 1302px;
+        border-radius: 10px;
+        border: 9px solid #d6ccb9;
+        background-color: #d6ccb9;
+        display: grid;
+        grid-gap: 0px;
+        grid-template-columns:
+          var(--dropzone-size) var(--dropzone-size) var(--dropzone-size)
+          var(--dropzone-size) var(--dropzone-size) var(--dropzone-size)
+          var(--dropzone-size) var(--dropzone-size) var(--dropzone-size)
+          var(--dropzone-size) var(--dropzone-size) var(--dropzone-size)
+          var(--dropzone-size) var(--dropzone-size) var(--dropzone-size)
+          var(--dropzone-size) var(--dropzone-size);
+        grid-template-rows:
+          var(--dropzone-size) var(--dropzone-size) var(--dropzone-size)
+          var(--dropzone-size) var(--dropzone-size) var(--dropzone-size)
+          var(--dropzone-size) var(--dropzone-size) var(--dropzone-size)
+          var(--dropzone-size) var(--dropzone-size) var(--dropzone-size)
+          var(--dropzone-size) var(--dropzone-size) var(--dropzone-size)
+          var(--dropzone-size) var(--dropzone-size) var(--dropzone-size)
+          var(--dropzone-size) var(--dropzone-size) var(--dropzone-size)
+          var(--dropzone-size);
+        grid-gap: 0px;
+        align-self: center;
+        margin-left: max(min(calc(50vw - 510px), 10px) + calc(37vw - 510px), 10px);
+        margin-right: max(50vw - 505px, 10vw + 32px);
+        margin-top: 35px;
+      }
+
+      .component-menu {
+        position: fixed;
+        right: 10px;
+        top: 35px;
+        height: calc(100vh - 55px);
+        /* todo: improve this equation *still */
+        /* while: (right > 150) right, else: right */
+        width: calc(max(50vw - 510px, var(--menu-mid)) - 0px);
+        background-color: indianred;
+        border: 2px solid firebrick;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .menu-top {
+        display: flex;
+        justify-content: space-between;
+        align-content: flex-end;
+        width: 100%;
+        height: 60px;
+        background-color: firebrick;
+        margin: 0px;
+        margin-bottom: 5px;
+      }
+
+      .menu-container {
+        height: 100%;
+        margin-left: 5px;
+        padding: 5px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        scrollbar-color: firebrick #0000;
+        scrollbar-width: medium;
+      }
+
+      .dropzone {
+        width: var(--dropzone-size);
+        height: var(--dropzone-size);
+      }
+
+      .sheet-zone {
+        border-radius: 5px;
+        background-color: #d6ccb9;
+      }
+
+      .trash {
+        width: auto;
+        height: 100%;
+        border: none;
+        margin-left: 0px;
+        margin-top: 0px;
+        /* background-color: indianred; */
+      }
+
+      .trashimg {
+        position: end;
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 3px;
+        margin: 5px;
+        margin-left: 0px;
+        background-color: indianred;
+      }
+
+      .trash .component {
+        visibility: hidden;
+      }
+
+      .component {
+        position: relative;
+        /* left: 1px;
+        top: 1px; */
+        background-color: #dbceb6;
+        border: 2px solid #dbceb6;
+        border-radius: 5px;
+        box-shadow: 1px 1px 1px #7777;
+        z-index: 1;
+      }
+
+      .handle {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 0px;
+        height: 0px;
+        border: 7.5px solid firebrick;
+        border-bottom-color: transparent;
+        border-right-color: transparent;
+        border-radius: 3px;
+        cursor: grab;
+        z-index: 2;
+      }
+
+      .menu-zone {
+        left: 0;
+        top: 0;
+        min-height: calc(var(--dropzone-size) / 4);
+        width: calc(var(--dropzone-size) * 1);
+        margin-bottom: 10px;
+      }
+
+      .draggable-mirror {
+        opacity: 0.7;
+        z-index: 2;
+        width: var(--component-size);
+        height: var(--component-size);
+      }
+
+      input {
+        min-width: 200px;
+        display: inline-block;
+        font-size: 22px;
+      }
+
+      input:focus {
+        background-color: lightblue;
+      }
+
+      input[type="text"] {
+        resize: none;
+      }
+
+      input[type="checkbox"] {
+        color: #f2b2b2;
+      }
+    </style>
   </head>
 
-  <body onload="main()">
+  <body>
     <div id="topBar" class="bar">
       <img
+        id="page-icon"
         class="bar-item"
-        src="characterize.png"
+        src="7215eaf03d970c08f494.png"
         width="23"
         height="23"
         style="border-radius: 3px"
@@ -28,10 +261,24 @@
       <!--Sheet dropzones and components will be generated here-->
     </div>
     <div class="component-menu">
-      <div class="menu-top"></div>
+      <div class="menu-top container">
+        <div id="trash" class="trash dropzone">
+          <img id="trashimg" class="trashimg" src="5441e5e5cd5fd0995b67.png" />
+        </div>
+        <!-- <a
+            href="https://www.flaticon.com/free-icons/trash"
+            title="trash icons"
+            style="font-size: 5pt; color: bisque; width: 30px; overflow-wrap: break-word"
+          >
+            Trash icon by dmitri13 - Flaticon
+        </a> -->
+      </div>
       <div id="componentMenu" class="container menu-container">
         <!--Component options will be generated here-->
       </div>
     </div>
+    <script src="component.bundle.js"></script>
+    <script src="character.bundle.js"></script>
+    <script src="app.bundle.js"></script>
   </body>
 </html>
