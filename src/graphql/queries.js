@@ -1,18 +1,16 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getComponentOutput = /* GraphQL */ `
-  query GetComponentOutput($id: ID!) {
-    getComponentOutput(id: $id) {
+export const getComponentItem = /* GraphQL */ `
+  query GetComponentItem($id: ID!) {
+    getComponentItem(id: $id) {
       id
       x
       y
       width
       height
-      tag
       content
-      extraStyle
-      characterVariable
+      style
       componentID
       createdAt
       updatedAt
@@ -22,27 +20,21 @@ export const getComponentOutput = /* GraphQL */ `
     }
   }
 `;
-export const listComponentOutputs = /* GraphQL */ `
-  query ListComponentOutputs(
-    $filter: ModelComponentOutputFilterInput
+export const listComponentItems = /* GraphQL */ `
+  query ListComponentItems(
+    $filter: ModelComponentItemFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listComponentOutputs(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
+    listComponentItems(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         x
         y
         width
         height
-        tag
         content
-        extraStyle
-        characterVariable
+        style
         componentID
         createdAt
         updatedAt
@@ -55,14 +47,14 @@ export const listComponentOutputs = /* GraphQL */ `
     }
   }
 `;
-export const syncComponentOutputs = /* GraphQL */ `
-  query SyncComponentOutputs(
-    $filter: ModelComponentOutputFilterInput
+export const syncComponentItems = /* GraphQL */ `
+  query SyncComponentItems(
+    $filter: ModelComponentItemFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncComponentOutputs(
+    syncComponentItems(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -74,10 +66,8 @@ export const syncComponentOutputs = /* GraphQL */ `
         y
         width
         height
-        tag
         content
-        extraStyle
-        characterVariable
+        style
         componentID
         createdAt
         updatedAt
@@ -98,10 +88,9 @@ export const getComponentInput = /* GraphQL */ `
       y
       width
       height
-      tag
-      content
-      extraStyle
-      characterVariable
+      type
+      variable
+      style
       componentID
       createdAt
       updatedAt
@@ -124,10 +113,9 @@ export const listComponentInputs = /* GraphQL */ `
         y
         width
         height
-        tag
-        content
-        extraStyle
-        characterVariable
+        type
+        variable
+        style
         componentID
         createdAt
         updatedAt
@@ -159,10 +147,92 @@ export const syncComponentInputs = /* GraphQL */ `
         y
         width
         height
-        tag
-        content
-        extraStyle
-        characterVariable
+        type
+        variable
+        style
+        componentID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getComponentOutput = /* GraphQL */ `
+  query GetComponentOutput($id: ID!) {
+    getComponentOutput(id: $id) {
+      id
+      x
+      y
+      width
+      height
+      variable
+      style
+      componentID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listComponentOutputs = /* GraphQL */ `
+  query ListComponentOutputs(
+    $filter: ModelComponentOutputFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listComponentOutputs(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        x
+        y
+        width
+        height
+        variable
+        style
+        componentID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncComponentOutputs = /* GraphQL */ `
+  query SyncComponentOutputs(
+    $filter: ModelComponentOutputFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncComponentOutputs(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        x
+        y
+        width
+        height
+        variable
+        style
         componentID
         createdAt
         updatedAt
@@ -181,6 +251,11 @@ export const getComponent = /* GraphQL */ `
       id
       name
       width
+      height
+      Items {
+        nextToken
+        startedAt
+      }
       Inputs {
         nextToken
         startedAt
@@ -189,7 +264,6 @@ export const getComponent = /* GraphQL */ `
         nextToken
         startedAt
       }
-      height
       createdAt
       updatedAt
       _version

@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "ComponentOutput": {
-            "name": "ComponentOutput",
+        "ComponentItem": {
+            "name": "ComponentItem",
             "fields": {
                 "id": {
                     "name": "id",
@@ -13,35 +13,28 @@ export const schema = {
                 "x": {
                     "name": "x",
                     "isArray": false,
-                    "type": "String",
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
                 "y": {
                     "name": "y",
                     "isArray": false,
-                    "type": "String",
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
                 "width": {
                     "name": "width",
                     "isArray": false,
-                    "type": "String",
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
                 "height": {
                     "name": "height",
                     "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "tag": {
-                    "name": "tag",
-                    "isArray": false,
-                    "type": "String",
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -52,15 +45,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "extraStyle": {
-                    "name": "extraStyle",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "characterVariable": {
-                    "name": "characterVariable",
+                "style": {
+                    "name": "style",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -91,7 +77,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "ComponentOutputs",
+            "pluralName": "ComponentItems",
             "attributes": [
                 {
                     "type": "model",
@@ -162,29 +148,22 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "tag": {
-                    "name": "tag",
+                "type": {
+                    "name": "type",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "content": {
-                    "name": "content",
+                "variable": {
+                    "name": "variable",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "extraStyle": {
-                    "name": "extraStyle",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "characterVariable": {
-                    "name": "characterVariable",
+                "style": {
+                    "name": "style",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -248,6 +227,116 @@ export const schema = {
                 }
             ]
         },
+        "ComponentOutput": {
+            "name": "ComponentOutput",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "x": {
+                    "name": "x",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "y": {
+                    "name": "y",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "width": {
+                    "name": "width",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "height": {
+                    "name": "height",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "variable": {
+                    "name": "variable",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "style": {
+                    "name": "style",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "componentID": {
+                    "name": "componentID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "ComponentOutputs",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byComponent",
+                        "fields": [
+                            "componentID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Component": {
             "name": "Component",
             "fields": {
@@ -271,6 +360,27 @@ export const schema = {
                     "type": "Int",
                     "isRequired": false,
                     "attributes": []
+                },
+                "height": {
+                    "name": "height",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Items": {
+                    "name": "Items",
+                    "isArray": true,
+                    "type": {
+                        "model": "ComponentItem"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "componentID"
+                    }
                 },
                 "Inputs": {
                     "name": "Inputs",
@@ -299,13 +409,6 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "componentID"
                     }
-                },
-                "height": {
-                    "name": "height",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -834,5 +937,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "6d79825056d23e5f9ff2b1f0bfabee08"
+    "version": "3c40395b6e7888c4ea661e2838784183"
 };

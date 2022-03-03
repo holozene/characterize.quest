@@ -12,11 +12,12 @@ const Ability = {
   "ANY": "ANY"
 };
 
-const { ComponentOutput, ComponentInput, Component, SpellAccess, Features, FeaturesByClass, Spells, Classes } = initSchema(schema);
+const { ComponentItem, ComponentInput, ComponentOutput, Component, SpellAccess, Features, FeaturesByClass, Spells, Classes } = initSchema(schema);
 
 export {
-  ComponentOutput,
+  ComponentItem,
   ComponentInput,
+  ComponentOutput,
   Component,
   SpellAccess,
   Features,

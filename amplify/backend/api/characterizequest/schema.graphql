@@ -1,13 +1,11 @@
-type ComponentOutput @model @auth(rules: [{allow: public}]) {
+type ComponentItem @model @auth(rules: [{allow: public}]) {
   id: ID!
-  x: String
-  y: String
-  width: String
-  height: String
-  tag: String
+  x: Int
+  y: Int
+  width: Int
+  height: Int
   content: String
-  extraStyle: String
-  characterVariable: String
+  style: String
   componentID: ID! @index(name: "byComponent")
 }
 
@@ -17,10 +15,20 @@ type ComponentInput @model @auth(rules: [{allow: public}]) {
   y: Int
   width: Int
   height: Int
-  tag: String
-  content: String
-  extraStyle: String
-  characterVariable: String
+  type: String
+  variable: String
+  style: String
+  componentID: ID! @index(name: "byComponent")
+}
+
+type ComponentOutput @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  x: Int
+  y: Int
+  width: Int
+  height: Int
+  variable: String
+  style: String
   componentID: ID! @index(name: "byComponent")
 }
 
@@ -28,9 +36,10 @@ type Component @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
   width: Int
+  height: Int
+  Items: [ComponentItem] @hasMany(indexName: "byComponent", fields: ["id"])
   Inputs: [ComponentInput] @hasMany(indexName: "byComponent", fields: ["id"])
   Outputs: [ComponentOutput] @hasMany(indexName: "byComponent", fields: ["id"])
-  height: Int
 }
 
 type SpellAccess @model @auth(rules: [{allow: public}]) {

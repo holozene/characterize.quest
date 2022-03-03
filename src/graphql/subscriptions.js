@@ -1,18 +1,16 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateComponentOutput = /* GraphQL */ `
-  subscription OnCreateComponentOutput {
-    onCreateComponentOutput {
+export const onCreateComponentItem = /* GraphQL */ `
+  subscription OnCreateComponentItem {
+    onCreateComponentItem {
       id
       x
       y
       width
       height
-      tag
       content
-      extraStyle
-      characterVariable
+      style
       componentID
       createdAt
       updatedAt
@@ -22,18 +20,16 @@ export const onCreateComponentOutput = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateComponentOutput = /* GraphQL */ `
-  subscription OnUpdateComponentOutput {
-    onUpdateComponentOutput {
+export const onUpdateComponentItem = /* GraphQL */ `
+  subscription OnUpdateComponentItem {
+    onUpdateComponentItem {
       id
       x
       y
       width
       height
-      tag
       content
-      extraStyle
-      characterVariable
+      style
       componentID
       createdAt
       updatedAt
@@ -43,18 +39,16 @@ export const onUpdateComponentOutput = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteComponentOutput = /* GraphQL */ `
-  subscription OnDeleteComponentOutput {
-    onDeleteComponentOutput {
+export const onDeleteComponentItem = /* GraphQL */ `
+  subscription OnDeleteComponentItem {
+    onDeleteComponentItem {
       id
       x
       y
       width
       height
-      tag
       content
-      extraStyle
-      characterVariable
+      style
       componentID
       createdAt
       updatedAt
@@ -72,10 +66,9 @@ export const onCreateComponentInput = /* GraphQL */ `
       y
       width
       height
-      tag
-      content
-      extraStyle
-      characterVariable
+      type
+      variable
+      style
       componentID
       createdAt
       updatedAt
@@ -93,10 +86,9 @@ export const onUpdateComponentInput = /* GraphQL */ `
       y
       width
       height
-      tag
-      content
-      extraStyle
-      characterVariable
+      type
+      variable
+      style
       componentID
       createdAt
       updatedAt
@@ -114,10 +106,66 @@ export const onDeleteComponentInput = /* GraphQL */ `
       y
       width
       height
-      tag
-      content
-      extraStyle
-      characterVariable
+      type
+      variable
+      style
+      componentID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreateComponentOutput = /* GraphQL */ `
+  subscription OnCreateComponentOutput {
+    onCreateComponentOutput {
+      id
+      x
+      y
+      width
+      height
+      variable
+      style
+      componentID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateComponentOutput = /* GraphQL */ `
+  subscription OnUpdateComponentOutput {
+    onUpdateComponentOutput {
+      id
+      x
+      y
+      width
+      height
+      variable
+      style
+      componentID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteComponentOutput = /* GraphQL */ `
+  subscription OnDeleteComponentOutput {
+    onDeleteComponentOutput {
+      id
+      x
+      y
+      width
+      height
+      variable
+      style
       componentID
       createdAt
       updatedAt
@@ -133,6 +181,11 @@ export const onCreateComponent = /* GraphQL */ `
       id
       name
       width
+      height
+      Items {
+        nextToken
+        startedAt
+      }
       Inputs {
         nextToken
         startedAt
@@ -141,7 +194,6 @@ export const onCreateComponent = /* GraphQL */ `
         nextToken
         startedAt
       }
-      height
       createdAt
       updatedAt
       _version
@@ -156,6 +208,11 @@ export const onUpdateComponent = /* GraphQL */ `
       id
       name
       width
+      height
+      Items {
+        nextToken
+        startedAt
+      }
       Inputs {
         nextToken
         startedAt
@@ -164,7 +221,6 @@ export const onUpdateComponent = /* GraphQL */ `
         nextToken
         startedAt
       }
-      height
       createdAt
       updatedAt
       _version
@@ -179,6 +235,11 @@ export const onDeleteComponent = /* GraphQL */ `
       id
       name
       width
+      height
+      Items {
+        nextToken
+        startedAt
+      }
       Inputs {
         nextToken
         startedAt
@@ -187,7 +248,6 @@ export const onDeleteComponent = /* GraphQL */ `
         nextToken
         startedAt
       }
-      height
       createdAt
       updatedAt
       _version

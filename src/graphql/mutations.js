@@ -1,21 +1,19 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createComponentOutput = /* GraphQL */ `
-  mutation CreateComponentOutput(
-    $input: CreateComponentOutputInput!
-    $condition: ModelComponentOutputConditionInput
+export const createComponentItem = /* GraphQL */ `
+  mutation CreateComponentItem(
+    $input: CreateComponentItemInput!
+    $condition: ModelComponentItemConditionInput
   ) {
-    createComponentOutput(input: $input, condition: $condition) {
+    createComponentItem(input: $input, condition: $condition) {
       id
       x
       y
       width
       height
-      tag
       content
-      extraStyle
-      characterVariable
+      style
       componentID
       createdAt
       updatedAt
@@ -25,21 +23,19 @@ export const createComponentOutput = /* GraphQL */ `
     }
   }
 `;
-export const updateComponentOutput = /* GraphQL */ `
-  mutation UpdateComponentOutput(
-    $input: UpdateComponentOutputInput!
-    $condition: ModelComponentOutputConditionInput
+export const updateComponentItem = /* GraphQL */ `
+  mutation UpdateComponentItem(
+    $input: UpdateComponentItemInput!
+    $condition: ModelComponentItemConditionInput
   ) {
-    updateComponentOutput(input: $input, condition: $condition) {
+    updateComponentItem(input: $input, condition: $condition) {
       id
       x
       y
       width
       height
-      tag
       content
-      extraStyle
-      characterVariable
+      style
       componentID
       createdAt
       updatedAt
@@ -49,21 +45,19 @@ export const updateComponentOutput = /* GraphQL */ `
     }
   }
 `;
-export const deleteComponentOutput = /* GraphQL */ `
-  mutation DeleteComponentOutput(
-    $input: DeleteComponentOutputInput!
-    $condition: ModelComponentOutputConditionInput
+export const deleteComponentItem = /* GraphQL */ `
+  mutation DeleteComponentItem(
+    $input: DeleteComponentItemInput!
+    $condition: ModelComponentItemConditionInput
   ) {
-    deleteComponentOutput(input: $input, condition: $condition) {
+    deleteComponentItem(input: $input, condition: $condition) {
       id
       x
       y
       width
       height
-      tag
       content
-      extraStyle
-      characterVariable
+      style
       componentID
       createdAt
       updatedAt
@@ -84,10 +78,9 @@ export const createComponentInput = /* GraphQL */ `
       y
       width
       height
-      tag
-      content
-      extraStyle
-      characterVariable
+      type
+      variable
+      style
       componentID
       createdAt
       updatedAt
@@ -108,10 +101,9 @@ export const updateComponentInput = /* GraphQL */ `
       y
       width
       height
-      tag
-      content
-      extraStyle
-      characterVariable
+      type
+      variable
+      style
       componentID
       createdAt
       updatedAt
@@ -132,10 +124,75 @@ export const deleteComponentInput = /* GraphQL */ `
       y
       width
       height
-      tag
-      content
-      extraStyle
-      characterVariable
+      type
+      variable
+      style
+      componentID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createComponentOutput = /* GraphQL */ `
+  mutation CreateComponentOutput(
+    $input: CreateComponentOutputInput!
+    $condition: ModelComponentOutputConditionInput
+  ) {
+    createComponentOutput(input: $input, condition: $condition) {
+      id
+      x
+      y
+      width
+      height
+      variable
+      style
+      componentID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateComponentOutput = /* GraphQL */ `
+  mutation UpdateComponentOutput(
+    $input: UpdateComponentOutputInput!
+    $condition: ModelComponentOutputConditionInput
+  ) {
+    updateComponentOutput(input: $input, condition: $condition) {
+      id
+      x
+      y
+      width
+      height
+      variable
+      style
+      componentID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteComponentOutput = /* GraphQL */ `
+  mutation DeleteComponentOutput(
+    $input: DeleteComponentOutputInput!
+    $condition: ModelComponentOutputConditionInput
+  ) {
+    deleteComponentOutput(input: $input, condition: $condition) {
+      id
+      x
+      y
+      width
+      height
+      variable
+      style
       componentID
       createdAt
       updatedAt
@@ -154,6 +211,11 @@ export const createComponent = /* GraphQL */ `
       id
       name
       width
+      height
+      Items {
+        nextToken
+        startedAt
+      }
       Inputs {
         nextToken
         startedAt
@@ -162,7 +224,6 @@ export const createComponent = /* GraphQL */ `
         nextToken
         startedAt
       }
-      height
       createdAt
       updatedAt
       _version
@@ -180,6 +241,11 @@ export const updateComponent = /* GraphQL */ `
       id
       name
       width
+      height
+      Items {
+        nextToken
+        startedAt
+      }
       Inputs {
         nextToken
         startedAt
@@ -188,7 +254,6 @@ export const updateComponent = /* GraphQL */ `
         nextToken
         startedAt
       }
-      height
       createdAt
       updatedAt
       _version
@@ -206,6 +271,11 @@ export const deleteComponent = /* GraphQL */ `
       id
       name
       width
+      height
+      Items {
+        nextToken
+        startedAt
+      }
       Inputs {
         nextToken
         startedAt
@@ -214,7 +284,6 @@ export const deleteComponent = /* GraphQL */ `
         nextToken
         startedAt
       }
-      height
       createdAt
       updatedAt
       _version

@@ -12,11 +12,15 @@ export enum Ability {
 
 
 
-type ComponentOutputMetaData = {
+type ComponentItemMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
 type ComponentInputMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type ComponentOutputMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -44,21 +48,19 @@ type ClassesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class ComponentOutput {
+export declare class ComponentItem {
   readonly id: string;
-  readonly x?: string;
-  readonly y?: string;
-  readonly width?: string;
-  readonly height?: string;
-  readonly tag?: string;
+  readonly x?: number;
+  readonly y?: number;
+  readonly width?: number;
+  readonly height?: number;
   readonly content?: string;
-  readonly extraStyle?: string;
-  readonly characterVariable?: string;
+  readonly style?: string;
   readonly componentID: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
-  constructor(init: ModelInit<ComponentOutput, ComponentOutputMetaData>);
-  static copyOf(source: ComponentOutput, mutator: (draft: MutableModel<ComponentOutput, ComponentOutputMetaData>) => MutableModel<ComponentOutput, ComponentOutputMetaData> | void): ComponentOutput;
+  constructor(init: ModelInit<ComponentItem, ComponentItemMetaData>);
+  static copyOf(source: ComponentItem, mutator: (draft: MutableModel<ComponentItem, ComponentItemMetaData>) => MutableModel<ComponentItem, ComponentItemMetaData> | void): ComponentItem;
 }
 
 export declare class ComponentInput {
@@ -67,10 +69,9 @@ export declare class ComponentInput {
   readonly y?: number;
   readonly width?: number;
   readonly height?: number;
-  readonly tag?: string;
-  readonly content?: string;
-  readonly extraStyle?: string;
-  readonly characterVariable?: string;
+  readonly type?: string;
+  readonly variable?: string;
+  readonly style?: string;
   readonly componentID: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
@@ -78,13 +79,29 @@ export declare class ComponentInput {
   static copyOf(source: ComponentInput, mutator: (draft: MutableModel<ComponentInput, ComponentInputMetaData>) => MutableModel<ComponentInput, ComponentInputMetaData> | void): ComponentInput;
 }
 
+export declare class ComponentOutput {
+  readonly id: string;
+  readonly x?: number;
+  readonly y?: number;
+  readonly width?: number;
+  readonly height?: number;
+  readonly variable?: string;
+  readonly style?: string;
+  readonly componentID: string;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<ComponentOutput, ComponentOutputMetaData>);
+  static copyOf(source: ComponentOutput, mutator: (draft: MutableModel<ComponentOutput, ComponentOutputMetaData>) => MutableModel<ComponentOutput, ComponentOutputMetaData> | void): ComponentOutput;
+}
+
 export declare class Component {
   readonly id: string;
   readonly name?: string;
   readonly width?: number;
+  readonly height?: number;
+  readonly Items?: (ComponentItem | null)[];
   readonly Inputs?: (ComponentInput | null)[];
   readonly Outputs?: (ComponentOutput | null)[];
-  readonly height?: number;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Component, ComponentMetaData>);
