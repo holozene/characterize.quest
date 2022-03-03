@@ -19,7 +19,7 @@ export class Sheet {
               width
               height
               content
-              extraStyle
+              style
             }
           }
           Inputs {
@@ -30,7 +30,7 @@ export class Sheet {
               height
               type
               variable
-              extraStyle
+              style
             }
           }
           Outputs {
@@ -40,7 +40,7 @@ export class Sheet {
               width
               height
               variable
-              extraStyle
+              style
             }
           }
         }
@@ -50,33 +50,29 @@ export class Sheet {
 
   constructor(menuComponents = [], sheetComponents = []) {
     Amplify.configure(awsconfig);
-    // this.loadCharacter();
-    this.menuComponents = this.loadMenu();
-    // sheetComponents = this.loadSheet();
+    // this.character = this.loadCharacter();
+    this.menuComponents = [];
+    this.loadMenu();
+    // this.sheetComponents = this.loadSheet();
     this.genDropzones();
   }
 
   async loadMenu() {
-    let components = await API.graphql({ query: this.componentList });
-    console.debug(components.data.listComponents.items);
-    components.data.listComponents.items.forEach(elem => {
+    let query = await API.graphql({ query: this.componentList });
+    query.data.listComponents.items.forEach(elem => {
       let items = [];
-      let inputs = [];
-      let outputs = [];
       elem.Items.items.forEach(item => {
-        items = new comp.Item(
+        items = items.concat(new comp.Item(
           item.x,
           item.y,
           item.width,
           item.height,
-          item.type,
-          item.variable,
+          item.content,
           item.style
-        );
+        ));
       });
-
       elem.Inputs.items.forEach(input => {
-        inputs = new comp.Input(
+        items = items.concat(new comp.Input(
           input.x,
           input.y,
           input.width,
@@ -84,33 +80,24 @@ export class Sheet {
           input.type,
           input.variable,
           input.style
-        );
+        ));
       });
-
       elem.Outputs.items.forEach(output => {
-        outputs = new comp.Output(
+        items = items.concat(new comp.Output(
           output.x,
           output.y,
           output.width,
           output.height,
           output.variable,
           output.style
-        );
+        ));
       });
-
-      items = items.concat(inputs).concat(outputs);
-      console.debug(items);
-      new comp.Component(elem.name, elem.width, elem.height, items);
+      this.menuComponents = this.menuComponents.concat(new comp.Component(elem.name, elem.width, elem.height, items));
     });
-    return components;
   }
 
   async loadSheet() {
     return undefined;
-  }
-
-  async dbLoad() {
-    return components.data;
   }
 
   // generate dropzones
@@ -124,6 +111,11 @@ export class Sheet {
     bottom.setAttribute("style", "width: 1003px; background-color: #d6ccb9;");
     document.getElementById("sheetMain").appendChild(bottom);
     document.getElementById("sheetMain").setAttribute("style", "background-color: grey;");
+  }
+
+  respawnById(id) {
+    console.debug(this.menuComponents)
+    comp.Component.findById(id, this.menuComponents).respawn();
   }
 
   /*async function dbLoad() {
