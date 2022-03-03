@@ -1,5 +1,5 @@
 <p align="center" style="margin-bottom: 0px !important;">
-  <img width="200" src="https://characterize.quest/7215eaf03d970c08f494.png" alt="logo" align="center" style="border-radius: 10px !important;">
+  <img width="200" src="https://characterize.quest/9b0fdeea90c27d94566d.png" alt="logo" align="center" style="border-radius: 10px !important;">
 </p>
 
 <h1 align="center" style="margin-top: 0px;" > 
