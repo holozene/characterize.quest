@@ -8,7 +8,7 @@ module.exports = {
     app: "./src/app.js",
     component: "./src/classes/component.js",
     character: "./src/classes/character.js",
-    sheet: "./src/classes/sheet.js"
+    sheet: "./src/classes/sheet.js",
   },
   output: {
     filename: "[name].bundle.js",
@@ -46,67 +46,3 @@ module.exports = {
     }),
   ],
 };
-
-/*
-const config = {
-  mode: "development",
-  entry: {
-    index: "./src/index.js",
-    component: "./src/classes/Component.js",
-    character: "./src/classes/Character.js"
-  },
-  output: {
-    path: path.resolve(__dirname, "dist"),
-  },
-  devServer: {
-    open: false,
-    liveReload: true,
-    host: "localhost",
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: "index.html",
-    }),
-
-    // Add your plugins here
-    // Learn more about plugins from https://webpack.js.org/configuration/plugins/
-  ],
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        include: path.resolve(__dirname, "src"),
-        use: ["css-loader"],
-        options: {
-          esModule: true,
-          modules: {
-            namedExport: true,
-          },
-        },
-      },
-      {
-        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-        include: path.resolve(__dirname, "assets"),
-        type: "asset",
-      },
-
-      // Add your rules for custom modules here
-      // Learn more about loaders from https://webpack.js.org/loaders/
-    ],
-  },
-  experiments: {
-    topLevelAwait: true,
-  },
-};
-
-module.exports = () => {
-  if (isProduction) {
-    config.mode = "production";
-    config.devtool = "eval";
-    config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());
-  } else {
-    config.mode = "development";
-    config.devtool = "source-map";
-  }
-  return config;
-};*/

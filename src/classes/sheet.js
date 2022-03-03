@@ -62,37 +62,44 @@ export class Sheet {
     query.data.listComponents.items.forEach(elem => {
       let items = [];
       elem.Items.items.forEach(item => {
-        items = items.concat(new comp.Item(
-          item.x,
-          item.y,
-          item.width,
-          item.height,
-          item.content,
-          item.style
-        ));
+        items = items.concat(
+          new comp.Item(item.x, 
+            item.y, 
+            item.width, 
+            item.height, 
+            item.content, 
+            item.style
+          )
+        );
       });
       elem.Inputs.items.forEach(input => {
-        items = items.concat(new comp.Input(
-          input.x,
-          input.y,
-          input.width,
-          input.height,
-          input.type,
-          input.variable,
-          input.style
-        ));
+        items = items.concat(
+          new comp.Input(
+            input.x,
+            input.y,
+            input.width,
+            input.height,
+            input.type,
+            input.variable,
+            input.style
+          )
+        );
       });
       elem.Outputs.items.forEach(output => {
-        items = items.concat(new comp.Output(
-          output.x,
-          output.y,
-          output.width,
-          output.height,
-          output.variable,
-          output.style
-        ));
+        items = items.concat(
+          new comp.Output(
+            output.x,
+            output.y,
+            output.width,
+            output.height,
+            output.variable,
+            output.style
+          )
+        );
       });
-      this.menuComponents = this.menuComponents.concat(new comp.Component(elem.name, elem.width, elem.height, items));
+      this.menuComponents = this.menuComponents.concat(
+        new comp.Component(elem.name, elem.width, elem.height, items)
+      );
     });
   }
 
@@ -114,49 +121,7 @@ export class Sheet {
   }
 
   respawnById(id) {
-    console.debug(this.menuComponents)
+    console.debug(this.menuComponents);
     comp.Component.findById(id, this.menuComponents).respawn();
   }
-
-  /*async function dbLoad() {
-    const models = await DataStore.query(Component);
-    console.debug(models);
-    // Amplify.configure(awsconfig);
-    // var components = await API.graphql({ query: componentList });
-    // console.debug(components.data);
-    // return components.data;
-  }
-  
-  // menuComponents = db.load
-  // menuComponents.forEach(element => element.generateMenu(db.components.element));
-  
-  function loadMenuComponents(d) {
-    console.debug(d);
-    var list = new Array();
-    console.debug("list" + list);
-    
-    d.forEach(element => {
-      list.push(new Component(d.name, d.x, d.y, d.width, d.height));
-    }); // console.debug(element);
-  
-    // input = document.querySelector('input[type="number"]');
-    // input.addEventListener("keyup", function (event) {
-    //   if ((event.which != 8 && event.which != 0 && event.which < 48) || event.which > 57) {
-    //     this.value = this.value.replace(/\D/g, "");
-    //   }
-    // });
-  
-    return list;
-  }
-  
-  // function loadMenuComponent(d) {
-  //   console.debug(new Component(d.name, d.x, d.y, d.width, d.height));
-  //   return ;
-  // }
-  
-  dbLoad().then(value => {
-    menuComponents = loadMenuComponents(value.listComponents.items);
-    console.debug(menuComponents);
-  });
-  */
 }

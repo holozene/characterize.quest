@@ -10,7 +10,7 @@ export class Component {
     this.width = width;
     this.height = height;
     this.items = items;
-    this.spawn()
+    this.spawn();
   }
 
   spawn() {
@@ -28,7 +28,6 @@ export class Component {
   respawn() {
     const zone = document.getElementById("drop" + this.id);
     zone.classList.add("draggable-dropzone--occupied");
-    // console.log(zone.classList);
     zone.appendChild(this.generateComponent());
   }
 
@@ -45,8 +44,6 @@ export class Component {
       this.items.forEach(item => {
         component.appendChild(item.generate());
       });
-    // component.appendChild(this.genElemH("div", "&ensp;" + Component.uniqueIdCounter.toString()));
-    // component.appendChild(this.genElemA("input", "type", this.type));
     return component;
   }
 
@@ -174,13 +171,3 @@ export class Output extends Item {
     return elem;
   }
 }
-
-// const intBox = Symbol(int);
-// const strBox = Symbol(str);
-// const dropdown = Symbol(enume);
-
-// const boolOut = Symbol(boolO);
-// const intOut = Symbol(intO);
-// const bonusOut = Symbol(bonusO);
-// const strOut = Symbol(strO);
-// const diceOut = Symbol(dice);

@@ -6,10 +6,6 @@ class Class {
 
 class Equipment {}
 
-// const twiceProf = Symbol(x2);
-// const oneProf = Symbol(x1);
-// const halfProf = Symbol(d2);
-
 class Skill {
   constructor(name, attribute, prof) {}
 
