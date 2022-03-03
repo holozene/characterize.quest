@@ -7,7 +7,8 @@ module.exports = {
   entry: {
     app: "./src/app.js",
     component: "./src/classes/component.js",
-    character: "./src/classes/character.js"
+    character: "./src/classes/character.js",
+    sheet: "./src/classes/sheet.js"
   },
   output: {
     filename: "[name].bundle.js",

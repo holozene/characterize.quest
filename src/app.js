@@ -1,71 +1,12 @@
-import Amplify from "aws-amplify";
+// import Amplify from "aws-amplify";
 import * as comp from "./classes/component";
+import * as sheet from "./classes/sheet";
 import * as char from "./classes/character";
 import Icon from "../assets/characterize.png";
 import Trash from "../assets/trash.png";
 import * as Draggable from "@shopify/draggable";
-//import { listTodos } from './graphql/queries';
-
-//const Components = Amplify.API.graphql(Amplify.graphqlOperation(Amplify.API.listComponents));
-
-// import Amplify, { API, graphqlOperation } from "../node_modules/@aws-amplify/"; //node_modules/aws-amplify/index.js";
-// import awsconfig from "./aws-exports.js";
-// Amplify.configure(awsconfig);
-
-// async function createNewTodo() {
-//   const todo = {
-//     name: "Use AppSync",
-//     description: `Realtime and Offline (${new Date().toLocaleString()})`,
-//   };
-
-//   return await API.graphql(graphqlOperation(createTodo, { input: todo }));
-// }
-/*
-query MyQuery {
-  listComponents {
-    items {
-      name
-      width
-      height
-      Inputs {
-        items {
-          x
-          y
-          width
-          height
-          characterVariable
-          extraStyle
-        }
-      }
-      Outputs {
-        items {
-          x
-          y
-          width
-          height
-          characterVariable
-          extraStyle
-        }
-      }
-    }
-  }
-}
-*/
-
-// const trash = new Image();
-// trash.src = Trash;
-// trash.className = "trashimg";
-
-// generate dropzones
-for (let i = 0; i < 17 * 22; i++) {
-  const zone = document.createElement("div");
-  zone.className = "dropzone sheet-zone";
-  document.getElementById("sheetMain").appendChild(zone);
-}
-const bottom = document.createElement("div");
-bottom.setAttribute("style", "width: 1003px; background-color: #d6ccb9;");
-document.getElementById("sheetMain").appendChild(bottom);
-document.getElementById("sheetMain").setAttribute("style", "background-color: grey;");
+import { DataStore } from "@aws-amplify/datastore";
+import { Component } from "./models";
 
 /* todo:
  * connect to db
@@ -74,14 +15,21 @@ document.getElementById("sheetMain").setAttribute("style", "background-color: gr
  * generate html
  */
 
-// sheetComponents = db.load
-// sheetComponents.forEach(element => element.generateSheet(db.sheet.components.element));
-// menuComponents = db.load
-// menuComponents.forEach(element => element.generateMenu(db.components.element));
-const menuComponents = [
+var characterSheet = new sheet.Sheet();
+
+/*
+[
   new comp.Component("Character Name", 5, 2, [
-    new comp.Item(20, 80, 200, 20, "Character Name", ""), 
-    new comp.Input(20, 40, 200, 30, "text", "charName", "border: 3px bevel white; border-bottom: 5px solid indianred; border-radius: 25px;")
+    new comp.Item(20, 80, 200, 20, "Character Name", ""),
+    new comp.Input(
+      20,
+      40,
+      200,
+      30,
+      "text",
+      "charName",
+      "border: 3px bevel white; border-bottom: 5px solid indianred; border-radius: 25px;"
+    ),
   ]),
   new comp.Component("Ability Scores", 2, 10, [
     new comp.Item(20, 0, 10, 30, "Dexterity", ""), 
@@ -128,21 +76,18 @@ const menuComponents = [
     new comp.Input(475, 90, 100, 10, "text", "?", "font-size:10px; border: 3px bevel white; border-bottom: 5px solid indianred;"),
   ]),
   new comp.Component("date", 7, 2, [new comp.Item(), new comp.Item()]),
-];
-menuComponents.forEach(element => element.spawn());
-
-var input = document.querySelector('input[type="number"]');
-    input.addEventListener('keyup', function (event) {
-      if (event.which != 8 && event.which != 0 && event.which < 48 || event.which > 57) {
-        this.value = this.value.replace(/\D/g, "");
-      }
-    });
+];*/
+// menuComponents.forEach(element => element.spawn());
 
 const droppable = new Draggable.Droppable(document.querySelectorAll(".container"), {
   dropzone: ".dropzone",
   draggable: ".component",
-  handle: ".handle",
-  //delay: 100,
+  // handle: ".handle",
+  delay: {
+    mouse: 100,
+    drag: 100,
+    touch: 100,
+  },
 });
 
 droppable.on("drag:start", evt => {

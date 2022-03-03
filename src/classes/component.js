@@ -4,12 +4,13 @@ export class Component {
   static idCounter = 0;
   static uniqueIdCounter = 0;
 
-  constructor(name, width, height, items) {
+  constructor(name, width = 1, height = 1, items) {
     this.id = (Component.idCounter++).toString();
     this.name = name;
     this.width = width;
     this.height = height;
     this.items = items;
+    this.spawn()
   }
 
   spawn() {
@@ -89,8 +90,6 @@ export class Component {
   unitsToPixels(units) {
     return 54 + (units - 1) * 59 + "px";
   }
-  //54
-  //113
 
   static findById(id, componentArray) {
     let component = componentArray.find(component => component.id == id);
@@ -123,8 +122,8 @@ export class Item {
 export class Input extends Item {
   constructor(x, y, width, height, type = "text", variable, extraStyle) {
     super(x, y, width, height, undefined, extraStyle);
-    this.variable = variable;
     this.type = type;
+    this.variable = variable;
   }
 
   generate() {
@@ -163,7 +162,6 @@ export class Output extends Item {
   constructor(x, y, width, height, variable, extraStyle) {
     super(x, y, width, height, undefined, "", extraStyle);
     this.variable = variable;
-    this.type = type;
   }
 
   generate() {
