@@ -99,21 +99,21 @@ export class Component {
 }
 
 export class Item {
-  constructor(x = 0, y = 0, width = 0, height = 10, tag = "div", content = "", extraStyle = "") {
+  constructor(x = 0, y = 0, width = 0, height = 0, content = "", extraStyle = "") {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
-    this.tag = tag;
     this.content = content;
     this.extraStyle = extraStyle || " " + extraStyle;
   }
 
   generate() {
-    const elem = document.createElement(this.tag);
+    const elem = document.createElement("div");
+    elem.className = "item";
     elem.setAttribute(
       "style",
-      `position: absolute; width: ${this.x}px; height: ${this.height}px; left: ${this.x}px; top: ${this.y}px;${this.extraStyle}`
+      `position: absolute; left: ${this.x}px; top: ${this.y}px; width: ${this.width}px; height: ${this.height}px; ${this.extraStyle}`
     );
     elem.innerHTML = this.content;
     return elem;
@@ -121,8 +121,8 @@ export class Item {
 }
 
 export class Input extends Item {
-  constructor(x, y, width, height, variable, type = "text", content, extraStyle) {
-    super(x, y, width, height, undefined, content, extraStyle);
+  constructor(x, y, width, height, type = "text", variable, extraStyle) {
+    super(x, y, width, height, undefined, extraStyle);
     this.variable = variable;
     this.type = type;
   }
@@ -131,21 +131,27 @@ export class Input extends Item {
     const elem = document.createElement("input");
     elem.setAttribute(
       "style",
-      `position: absolute; width: ${this.x}px; height: ${this.height}px; left: ${this.x}px; top: ${this.y}px; ${this.extraStyle}`
+      `position: absolute; left: ${this.x}px; top: ${this.y}px; width: ${this.width}px; height: ${this.height}px; ${this.extraStyle}`
     );
     elem.setAttribute("type", this.type);
-    if (this.type == "text") {
+    if (this.type == "number") {
+      elem.value = c.character[this.variable];
+      elem.setAttribute("inputmode", "numeric");
+      elem.setAttribute("oninput", "this.value = this.value.replace(/[^0-9]/g, '');");
+    } else if (this.type == "text" && c.character[this.variable]) {
       elem.value = c.character[this.variable];
     } else if (this.type == "checkbox") {
       elem.checked = c.character[this.variable];
     }
     elem.className = this.variable;
-    elem.addEventListener("change", this.input);
+    elem.addEventListener("input", this.input);
     return elem;
   }
 
   input() {
-    if (this.type == "text") {
+    if (this.type == "number") {
+      c.character.setVal(this.className, this.value);
+    } else if (this.type == "text") {
       c.character.setVal(this.className, this.value);
     } else if (this.type == "checkbox") {
       c.character.setBool(this.className, this.checked);
@@ -154,7 +160,7 @@ export class Input extends Item {
 }
 
 export class Output extends Item {
-  constructor(x, y, width, height, variable, type = "text", extraStyle) {
+  constructor(x, y, width, height, variable, extraStyle) {
     super(x, y, width, height, undefined, "", extraStyle);
     this.variable = variable;
     this.type = type;
@@ -164,9 +170,9 @@ export class Output extends Item {
     const elem = document.createElement("div");
     elem.setAttribute(
       "style",
-      `position: absolute; width: ${this.x}px; height: ${this.height}px; left: ${this.x}px; top: ${this.y}px; ${this.extraStyle}`
+      `position: absolute; left: ${this.x}px; top: ${this.y}px; width: ${this.width}px; height: ${this.height}px; ${this.extraStyle}`
     );
-    elem.setAttribute("type", this.type);
+    elem.className = this.variable;
     return elem;
   }
 }

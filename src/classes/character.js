@@ -28,12 +28,16 @@ export class Character {
     int = 10,
     wis = 10,
     cha = 10,
+    race = "",
     classes,
     skills,
     weaponProf,
-    armorProf,
+    lArmorProf,
+    mArmorProf,
+    hArmorProf,
+    shieldProf,
     toolProf,
-    languageProf,
+    language1,
     equipment,
     maxHP,
     curHP,
@@ -54,12 +58,16 @@ export class Character {
     this.int = int;
     this.wis = wis;
     this.cha = cha;
+    this.race = race;
     this.classes = classes;
     this.skills = skills;
     this.weaponProf = weaponProf;
-    this.armorProf = armorProf;
+    this.lArmorProf = lArmorProf;
+    this.mArmorProf = mArmorProf;
+    this.hArmorProf = hArmorProf;
+    this.shieldProf = shieldProf;
     this.toolProf = toolProf;
-    this.languageProf = languageProf;
+    this.language1 = language1;
     this.equipment = equipment;
     this.maxHP = maxHP;
     this.curHP = curHP;
@@ -75,16 +83,16 @@ export class Character {
 
   setVal(variable, value) {
     character[variable] = value;
-    document
-      .querySelectorAll("." + variable)
-      .forEach(elem => (elem.value = character[variable]));
+    try {
+      document.querySelectorAll("." + variable).forEach(elem => (elem.value = character[variable]));
+    } catch (e) {
+      console.warn(`"${variable}" is not a variable: check character class definiton`);
+    }
   }
 
   setBool(variable, value) {
     character[variable] = value;
-    document
-      .querySelectorAll("." + variable)
-      .forEach(elem => (elem.checked = character[variable]));
+    document.querySelectorAll("." + variable).forEach(elem => (elem.checked = character[variable]));
   }
 
   addClass() {}

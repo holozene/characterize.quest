@@ -79,57 +79,64 @@ document.getElementById("sheetMain").setAttribute("style", "background-color: gr
 // menuComponents = db.load
 // menuComponents.forEach(element => element.generateMenu(db.components.element));
 const menuComponents = [
-  new Component("Character Name", "text", 5, 2, [
-    new Item(20, 80, 10, 30, "div", "Character_Name", "font-size:15px; color: black;"), 
-    new Input(20, 40, 10, 30, "text", "?", "border: 3px bevel white; border-bottom: 5px solid indianred; border-radius: 25px;")
+  new comp.Component("Character Name", 5, 2, [
+    new comp.Item(20, 80, 200, 20, "Character Name", ""), 
+    new comp.Input(20, 40, 200, 30, "text", "charName", "border: 3px bevel white; border-bottom: 5px solid indianred; border-radius: 25px;")
   ]),
-  new Component("background hue", "color", 2, 10, [
-    new Item(20, 0, 10, 30, "div", "Dexterity", "font-size:15px; color: black;"), 
-    new Input(20, 20, 10, 60, "number", "?", "border: 3px bevel white; min-width: 70px; text-align: center; border-style: double; border-radius: 5px 25px; border-width: 7px; border-color: indianred;"),
-    new Item(20, 120, 10, 30, "div", "Constitution", "font-size:15px; color: black;"), 
-    new Input(20, 140, 10, 60, "number", "?", "border: 3px bevel white; min-width: 70px; text-align: center; border-style: double; border-radius: 5px 25px; border-width: 7px; border-color: indianred;"),
-    new Item(20, 240, 10, 30, "div", "Intelligence", "font-size:15px; color: black;"), 
-    new Input(20, 260, 10, 60, "number", "?", "border: 3px bevel white; min-width: 70px; text-align: center; border-style: double; border-radius: 5px 25px; border-width: 7px; border-color: indianred;"),
-    new Item(20, 360, 10, 30, "div", "Wisdom", "font-size:15px; color: black;"), 
-    new Input(20, 380, 10, 60, "number", "?", "border: 3px bevel white; min-width: 70px; text-align: center; border-style: double; border-radius: 5px 25px; border-width: 7px; border-color: indianred;"),
-    new Item(20, 480, 10, 30, "div", "Charisma", "font-size:15px; color: black;"), 
-    new Input(20, 500, 10, 60, "number", "?", "border: 3px bevel white; min-width: 70px; text-align: center; border-style: double; border-radius: 5px 25px; border-width: 7px; border-color: indianred;")
+  new comp.Component("Ability Scores", 2, 10, [
+    new comp.Item(20, 0, 10, 30, "Dexterity", ""), 
+    new comp.Input(20, 20, 70, 60, "number", "dex", "border-radius: 5px 25px;"),
+    new comp.Item(20, 120, 10, 30, "Constitution", ""), 
+    new comp.Input(20, 140, 70, 60, "number", "con", "border-radius: 5px 25px;"),
+    new comp.Item(20, 240, 10, 30, "Intelligence", ""), 
+    new comp.Input(20, 260, 70, 60, "number", "int", "border-radius: 5px 25px;"),
+    new comp.Item(20, 360, 10, 30, "Wisdom", ""), 
+    new comp.Input(20, 380, 70, 60, "number", "wis", "border-radius: 5px 25px;"),
+    new comp.Item(20, 480, 10, 30, "Charisma", ""), 
+    new comp.Input(20, 500, 70, 60, "number", "cha", "border-radius: 5px 25px;")
   ]),
-  new Component("inspiration", "checkbox", 4, 3, [
-    new Item(20, 0, 10, 20, "div", "Level", "font-size:15px; color: black;"),  
-    new Input(20, 20, 10, 20, "number", "?", "border: 3px bevel white; min-width: 40px; text-align: center; border-bottom: 5px solid indianred; border-width: 7px;"),
-    new Item(100, 0, 10, 20, "div", "Class", "font-size:15px; color: black;"),  
-    new Input(100, 20, 10, 20, "text", "?", "border: 3px bevel white; min-width: 40px; border-bottom: 5px solid indianred; border-width: 7px;"),
-    new Item(20, 80, 10, 20, "div", "Race", "font-size:15px; color: black; text-align: center;"),  
-    new Input(20, 100, 10, 20, "text", "?", "border: 3px bevel white; min-width: 150px; border-bottom: 5px solid indianred; border-width: 7px;"),
+  new comp.Component("Class/Race", 4, 3, [
+    new comp.Item(20, 45, 40, 20, "Level", ""), 
+    new comp.Input(20, 20, 40, 20, "number", "?", "border: 1px solid white; border-bottom: 1px solid indianred;"),
+    new comp.Item(80, 45, 120, 20, "Class", ""), 
+    new comp.Input(80, 20, 120, 20, "text", "?", "border: 1px solid white; border-bottom: 1px solid indianred;"),
+    new comp.Item(20, 125, 180, 20, "Race", ""),
+    new comp.Input(20, 100, 180, 20, "text", "race", "border: 1px solid white; border-bottom: 1px solid indianred;"),
   ]),
-  new Component("roll damage", "button", 15, 2, [
-    new Item(20, 10, 10, 20, "div", "Armor", "font-size:15px; color: black;"),
-    new Item(20, 30, 10, 20, "div", "Light", "font-size:10px; color: black;"),
-    new Input(25, 20, 10, 60, "checkbox", "?", "border: none;"),
-    new Item(80, 30, 10, 20, "div", "Medium", "font-size:10px; color: black;"),
-    new Input(85, 20, 10, 60, "checkbox", "?", "border: none;"),
-    new Item(140, 30, 10, 20, "div", "Heavy", "font-size:10px; color: black;"),
-    new Input(145, 20, 10, 60, "checkbox", "?", "border: none;"),
-    new Item(200, 30, 10, 20, "div", "Shields", "font-size:10px; color: black;"),
-    new Input(205, 20, 10, 60, "checkbox", "?", "border: none;"),
+  new comp.Component("roll damage", 15, 2, [
+    new comp.Item(20, 10, 10, 20, "Armor", ""),
+    new comp.Item(20, 30, 10, 20, "Light", "font-size:10px;"),
+    new comp.Input(25, 40, 20, 20, "checkbox", "lArmorProf", "border: none;"),
+    new comp.Item(80, 30, 10, 20, "Medium", "font-size:10px;"),
+    new comp.Input(85, 40, 20, 20, "checkbox", "mArmorProf", "border: none;"),
+    new comp.Item(140, 30, 10, 20, "Heavy", "font-size:10px;"),
+    new comp.Input(145, 40, 20, 20, "checkbox", "hArmorProf", "border: none;"),
+    new comp.Item(200, 30, 10, 20, "Shields", "font-size:10px;"),
+    new comp.Input(205, 40, 20, 20, "checkbox", "shieldProf", "border: none;"),
 
-    new Item(270, 10, 10, 20, "div", "Weapons", "font-size:15px; color: black;"),
-    new Item(270, 30, 10, 20, "div", "Simple", "font-size:10px; color: black;"),
-    new Input(275, 20, 10, 60, "checkbox", "?", "border: none;"),
-    new Item(335, 30, 10, 20, "div", "Martial", "font-size:10px; color: black;"),
-    new Input(340, 20, 10, 60, "checkbox", "?", "border: none;"),
-    new Item(400, 30, 10, 20, "div", "Other", "font-size:10px; color: black;"),
-    new Input(405, 20, 10, 60, "checkbox", "?", "border: none;"),
+    new comp.Item(270, 10, 10, 20, "Weapons", ""),
+    new comp.Item(270, 30, 10, 20, "Simple", "font-size:10px;"),
+    new comp.Input(275, 40, 20, 20, "checkbox", "?", "border: none;"),
+    new comp.Item(335, 30, 10, 20, "Martial", "font-size:10px;"),
+    new comp.Input(340, 40, 20, 20, "checkbox", "?", "border: none;"),
+    new comp.Item(400, 30, 10, 20, "Other", "font-size:10px;"),
+    new comp.Input(405, 40, 20, 20, "checkbox", "?", "border: none;"),
 
-    new Item(475, 10, 10, 20, "div", "Languages", "font-size:15px; color: black;"),
-    new Input(475, 30, 10, 10, "text", "?", "font-size:10px; border: 3px bevel white; width: 40px; border-bottom: 5px solid indianred;"),
-    new Input(475, 60, 10, 10, "text", "?", "font-size:10px;border: 3px bevel white; width: 40px; border-bottom: 5px solid indianred;"),
-    new Input(475, 90, 10, 10, "text", "?", "font-size:10px;border: 3px bevel white; width: 40px; border-bottom: 5px solid indianred;"),
+    new comp.Item(475, 10, 10, 20, "Languages", ""),
+    new comp.Input(475, 30, 100, 10, "text", "language1", "font-size:10px; border: 3px bevel white; border-bottom: 5px solid indianred;"),
+    new comp.Input(475, 60, 100, 10, "text", "?", "font-size:10px; border: 3px bevel white; border-bottom: 5px solid indianred;"),
+    new comp.Input(475, 90, 100, 10, "text", "?", "font-size:10px; border: 3px bevel white; border-bottom: 5px solid indianred;"),
   ]),
-  new Component("date", "select", 7, 22, [new Item(), new Item()]),
+  new comp.Component("date", 7, 2, [new comp.Item(), new comp.Item()]),
 ];
 menuComponents.forEach(element => element.spawn());
+
+var input = document.querySelector('input[type="number"]');
+    input.addEventListener('keyup', function (event) {
+      if (event.which != 8 && event.which != 0 && event.which < 48 || event.which > 57) {
+        this.value = this.value.replace(/\D/g, "");
+      }
+    });
 
 const droppable = new Draggable.Droppable(document.querySelectorAll(".container"), {
   dropzone: ".dropzone",
@@ -141,7 +148,7 @@ const droppable = new Draggable.Droppable(document.querySelectorAll(".container"
 droppable.on("drag:start", evt => {
   // console.log(evt);
   // if (evt.data.sourceContainer.id == "componentMenu") {
-  //   Component.findById(evt.data.source.id, menuComponents).generateHTML(1);
+  //   comp.Component.findById(evt.data.source.id, menuComponents).generateHTML(1);
   // }
 });
 
@@ -162,6 +169,6 @@ droppable.on("droppable:stop", evt => {
     console.log(document.getElementById("trash").className);
 
     //document.getElementById(evt.data.dragEvent.data.source.id.toString()).remove();
-    //Component.delete(evt.data.dragEvent.data.source.classList[1]);
+    //comp.Component.delete(evt.data.dragEvent.data.source.classList[1]);
   }
 });
