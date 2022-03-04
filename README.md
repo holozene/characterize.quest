@@ -11,11 +11,8 @@
 
 <div align="center" > 
   
-  ![Website](https://img.shields.io/website?down_color=lightgrey&down_message=down&up_color=green&up_message=up&url=https%3A%2F%2Fcharacterize.quest) 
-<br/>
+  ![Website](https://img.shields.io/website?label=status&down_color=lightgrey&down_message=down&up_color=green&up_message=up&url=https%3A%2F%2Fcharacterize.quest) 
   ![Code size](https://img.shields.io/github/languages/code-size/holozene/characterize.quest) 
-  ![Lines of code](https://img.shields.io/tokei/lines/github/holozene/characterize.quest) 
-  <br/>
   ![Aws-amplify Version](https://img.shields.io/github/package-json/dependency-version/holozene/characterize.quest/aws-amplify?label=aws-amplify) 
   ![Shopify/draggable Version](https://img.shields.io/github/package-json/dependency-version/holozene/characterize.quest/@shopify/draggable?label=shopify%2Fdraggable) 
 </div>
