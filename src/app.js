@@ -1,32 +1,78 @@
-import * as comp from "./classes/component";
-import * as char from "./classes/character";
-import * as sheet from "./classes/sheet";
-import * as Draggable from "@shopify/draggable";
+import { DataStore } from "aws-amplify";
+import { Character5e, ComponentPosition } from "./models";
+import * as s from "./classes/sheet";
 import Icon from "../assets/logo.png";
 import Trash from "../assets/trash.png";
+import Sword from "../assets/sword.svg";
+import Background from "../assets/background.jpg";
 
-var characterSheet = new sheet.Sheet();
+var characterSheet;
 
-const droppable = new Draggable.Droppable(document.querySelectorAll(".container"), {
-  dropzone: ".dropzone",
-  draggable: ".component",
-  handle: ".handle",
-  delay: {
-    mouse: 0,
-    drag: 0,
-    touch: 100,
-  },
-});
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has("key") && urlParams.get("mode") != "testing") {
+  // load existing sheet
+  characterSheet = new s.Sheet(urlParams.get("key"));
+} else {
+  // no sheet selected (or in testing mode), prompt to create new sheet
+  let page = /* html */ ` 
+  <div id="topBar" class="bar">
+    <img class="bar-item" src="9b0fdeea90c27d94566d.png" width="23" height="23" style="border-radius: 3px" />
+    <div class="bar-item">Characterize</div>
+  </div>
+  <div id="background" background-image="16efcdb526d2dc0ed598.jpg" background-size="cover"> 
+    <div id="pageMain" class="page-main">
+      <p class="p1"> Welcome to <br/>
+      characterize.quest!</p> <br/>
+      <p class="p3"> Design, Use, and Print your own TTRPG character sheets. </p> <br/>
+      <div class = "swords" onclick="app.newSheet()">
+        <img src="42416b44ee537ff184e4.svg" class="sword1">
+        <button class="p4"> to a new sheet! </button>
+        <img src="42416b44ee537ff184e4.svg" class="sword2">
+      </div>
+      <p class="p5"> Check out the code or request a feature: <br/>
+        <i class="fa fa-github"></i>
+        <a href="https://github.com/holozene/characterize.quest">holozene/characterize.quest</a> 
+      </p>
+    </div>
+  </div>
+  `;
+  document.body.insertAdjacentHTML("afterbegin", page);
+}
 
-droppable.on("droppable:stop", evt => {
-  if (
-    evt.data.dragEvent.data.sourceContainer.id == "componentMenu" &&
-    evt.data.dropzone.classList[1] != "menu-zone"
-  ) {
-    characterSheet.respawnById(evt.data.dragEvent.data.source.classList[1]);
-  }
-  if (evt.data.dropzone.id == "trash") {
-    document.getElementById("trash").children[1].remove();
-    document.getElementById("trash").className = "trash dropzone";
-  }
-});
+export async function newSheet() {
+  document.getElementsByClassName("swords")[0].onclick = "";
+  document.getElementsByClassName("swords")[0].style.cursor = "default";
+  document.getElementsByClassName("sword1")[0].style.animation = "swing1 3s ease-in-out infinite";
+  document.getElementsByClassName("sword2")[0].style.animation = "swing2 3s ease-in-out infinite";
+  document.getElementsByClassName("p4")[0].style.cursor = "default";
+  document.getElementsByClassName("p4")[0].textContent = "loading...";
+  document.getElementsByClassName("p4")[0].style.color = "indianred";
+  document.getElementsByClassName("p4")[0].style.border = "1px solid indianred";
+  document.getElementsByClassName("p4")[0].style.marginTop = "23px";
+  if (urlParams.get("mode") != "testing") {
+    try {
+      let query = await DataStore.save(
+        new Character5e({
+          charName: "New Character!",
+        })
+      );
+      await DataStore.save(
+        new ComponentPosition({
+          characterID: query.id,
+          componentID: "e7a4a7d7-fb46-48a8-9b2b-39fb9ff55983",
+          x: 5,
+          y: 3,
+        })
+      );
+      console.debug("Character saved successfully!", query.id);
+      urlParams.set("key", query.id);
+      console.debug(urlParams.toString());
+      window.location.search = urlParams;
+    } catch (error) {
+      console.debug("Error saving Character", error);
+    }
+  } else
+    console.debug(
+      "I would be working but testing is enabled! if you meant to create a new sheet go to https://characterize.quest without a mode=testing url parameter"
+    );
+}

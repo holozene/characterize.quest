@@ -1,6 +1,245 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getCharacter5e = /* GraphQL */ `
+  query GetCharacter5e($id: ID!) {
+    getCharacter5e(id: $id) {
+      id
+      charName
+      playerName
+      str
+      dex
+      con
+      int
+      wis
+      cha
+      ComponentPositions {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listCharacter5es = /* GraphQL */ `
+  query ListCharacter5es(
+    $filter: ModelCharacter5eFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCharacter5es(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        charName
+        playerName
+        str
+        dex
+        con
+        int
+        wis
+        cha
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncCharacter5es = /* GraphQL */ `
+  query SyncCharacter5es(
+    $filter: ModelCharacter5eFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncCharacter5es(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        charName
+        playerName
+        str
+        dex
+        con
+        int
+        wis
+        cha
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getComponentPosition = /* GraphQL */ `
+  query GetComponentPosition($id: ID!) {
+    getComponentPosition(id: $id) {
+      id
+      x
+      y
+      characterID
+      componentID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listComponentPositions = /* GraphQL */ `
+  query ListComponentPositions(
+    $filter: ModelComponentPositionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listComponentPositions(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        x
+        y
+        characterID
+        componentID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncComponentPositions = /* GraphQL */ `
+  query SyncComponentPositions(
+    $filter: ModelComponentPositionFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncComponentPositions(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        x
+        y
+        characterID
+        componentID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getComponent = /* GraphQL */ `
+  query GetComponent($id: ID!) {
+    getComponent(id: $id) {
+      id
+      name
+      width
+      height
+      Items {
+        nextToken
+        startedAt
+      }
+      Inputs {
+        nextToken
+        startedAt
+      }
+      Outputs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listComponents = /* GraphQL */ `
+  query ListComponents(
+    $filter: ModelComponentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listComponents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        width
+        height
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncComponents = /* GraphQL */ `
+  query SyncComponents(
+    $filter: ModelComponentFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncComponents(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        width
+        height
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getComponentItem = /* GraphQL */ `
   query GetComponentItem($id: ID!) {
     getComponentItem(id: $id) {
@@ -234,461 +473,6 @@ export const syncComponentOutputs = /* GraphQL */ `
         variable
         style
         componentID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getComponent = /* GraphQL */ `
-  query GetComponent($id: ID!) {
-    getComponent(id: $id) {
-      id
-      name
-      width
-      height
-      Items {
-        nextToken
-        startedAt
-      }
-      Inputs {
-        nextToken
-        startedAt
-      }
-      Outputs {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const listComponents = /* GraphQL */ `
-  query ListComponents(
-    $filter: ModelComponentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listComponents(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        width
-        height
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncComponents = /* GraphQL */ `
-  query SyncComponents(
-    $filter: ModelComponentFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncComponents(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        width
-        height
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getSpellAccess = /* GraphQL */ `
-  query GetSpellAccess($id: ID!) {
-    getSpellAccess(id: $id) {
-      id
-      spell_id
-      class_id
-      subclass_id
-      race_id
-      level
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const listSpellAccesses = /* GraphQL */ `
-  query ListSpellAccesses(
-    $filter: ModelSpellAccessFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listSpellAccesses(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        spell_id
-        class_id
-        subclass_id
-        race_id
-        level
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncSpellAccesses = /* GraphQL */ `
-  query SyncSpellAccesses(
-    $filter: ModelSpellAccessFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncSpellAccesses(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        spell_id
-        class_id
-        subclass_id
-        race_id
-        level
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getFeatures = /* GraphQL */ `
-  query GetFeatures($id: ID!) {
-    getFeatures(id: $id) {
-      id
-      name
-      description
-      FeaturesByClasses {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const listFeatures = /* GraphQL */ `
-  query ListFeatures(
-    $filter: ModelFeaturesFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listFeatures(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        description
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncFeatures = /* GraphQL */ `
-  query SyncFeatures(
-    $filter: ModelFeaturesFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncFeatures(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        description
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getFeaturesByClass = /* GraphQL */ `
-  query GetFeaturesByClass($id: ID!) {
-    getFeaturesByClass(id: $id) {
-      id
-      subclass_id
-      feature_id
-      featuresID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const listFeaturesByClasses = /* GraphQL */ `
-  query ListFeaturesByClasses(
-    $filter: ModelFeaturesByClassFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listFeaturesByClasses(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        subclass_id
-        feature_id
-        featuresID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncFeaturesByClasses = /* GraphQL */ `
-  query SyncFeaturesByClasses(
-    $filter: ModelFeaturesByClassFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncFeaturesByClasses(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        subclass_id
-        feature_id
-        featuresID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getSpells = /* GraphQL */ `
-  query GetSpells($id: ID!) {
-    getSpells(id: $id) {
-      id
-      name
-      spell_lvl
-      cast_time
-      range
-      verbal
-      somatic
-      material
-      duration
-      concentration
-      school
-      description
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const listSpells = /* GraphQL */ `
-  query ListSpells(
-    $filter: ModelSpellsFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listSpells(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        spell_lvl
-        cast_time
-        range
-        verbal
-        somatic
-        material
-        duration
-        concentration
-        school
-        description
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncSpells = /* GraphQL */ `
-  query SyncSpells(
-    $filter: ModelSpellsFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncSpells(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        spell_lvl
-        cast_time
-        range
-        verbal
-        somatic
-        material
-        duration
-        concentration
-        school
-        description
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getClasses = /* GraphQL */ `
-  query GetClasses($id: ID!) {
-    getClasses(id: $id) {
-      id
-      name
-      save_1
-      save_2
-      skill_no
-      spellcasting
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const listClasses = /* GraphQL */ `
-  query ListClasses(
-    $filter: ModelClassesFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listClasses(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        save_1
-        save_2
-        skill_no
-        spellcasting
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncClasses = /* GraphQL */ `
-  query SyncClasses(
-    $filter: ModelClassesFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncClasses(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        save_1
-        save_2
-        skill_no
-        spellcasting
         createdAt
         updatedAt
         _version

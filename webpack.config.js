@@ -11,8 +11,11 @@ module.exports = {
     sheet: "./src/classes/sheet.js",
   },
   output: {
-    filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
+    filename: "[name].bundle.js",
+    sourceMapFilename: "[name].bundle.map",
+    libraryTarget: 'var',
+    library: '[name]'
   },
   module: {
     rules: [
