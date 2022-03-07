@@ -1,6 +1,207 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateCharacter5e = /* GraphQL */ `
+  subscription OnCreateCharacter5e {
+    onCreateCharacter5e {
+      id
+      charName
+      playerName
+      str
+      dex
+      con
+      int
+      wis
+      cha
+      ComponentPositions {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateCharacter5e = /* GraphQL */ `
+  subscription OnUpdateCharacter5e {
+    onUpdateCharacter5e {
+      id
+      charName
+      playerName
+      str
+      dex
+      con
+      int
+      wis
+      cha
+      ComponentPositions {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteCharacter5e = /* GraphQL */ `
+  subscription OnDeleteCharacter5e {
+    onDeleteCharacter5e {
+      id
+      charName
+      playerName
+      str
+      dex
+      con
+      int
+      wis
+      cha
+      ComponentPositions {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreateComponentPosition = /* GraphQL */ `
+  subscription OnCreateComponentPosition {
+    onCreateComponentPosition {
+      id
+      x
+      y
+      characterID
+      componentID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateComponentPosition = /* GraphQL */ `
+  subscription OnUpdateComponentPosition {
+    onUpdateComponentPosition {
+      id
+      x
+      y
+      characterID
+      componentID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteComponentPosition = /* GraphQL */ `
+  subscription OnDeleteComponentPosition {
+    onDeleteComponentPosition {
+      id
+      x
+      y
+      characterID
+      componentID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreateComponent = /* GraphQL */ `
+  subscription OnCreateComponent {
+    onCreateComponent {
+      id
+      name
+      width
+      height
+      Items {
+        nextToken
+        startedAt
+      }
+      Inputs {
+        nextToken
+        startedAt
+      }
+      Outputs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateComponent = /* GraphQL */ `
+  subscription OnUpdateComponent {
+    onUpdateComponent {
+      id
+      name
+      width
+      height
+      Items {
+        nextToken
+        startedAt
+      }
+      Inputs {
+        nextToken
+        startedAt
+      }
+      Outputs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteComponent = /* GraphQL */ `
+  subscription OnDeleteComponent {
+    onDeleteComponent {
+      id
+      name
+      width
+      height
+      Items {
+        nextToken
+        startedAt
+      }
+      Inputs {
+        nextToken
+        startedAt
+      }
+      Outputs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const onCreateComponentItem = /* GraphQL */ `
   subscription OnCreateComponentItem {
     onCreateComponentItem {
@@ -167,357 +368,6 @@ export const onDeleteComponentOutput = /* GraphQL */ `
       variable
       style
       componentID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onCreateComponent = /* GraphQL */ `
-  subscription OnCreateComponent {
-    onCreateComponent {
-      id
-      name
-      width
-      height
-      Items {
-        nextToken
-        startedAt
-      }
-      Inputs {
-        nextToken
-        startedAt
-      }
-      Outputs {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onUpdateComponent = /* GraphQL */ `
-  subscription OnUpdateComponent {
-    onUpdateComponent {
-      id
-      name
-      width
-      height
-      Items {
-        nextToken
-        startedAt
-      }
-      Inputs {
-        nextToken
-        startedAt
-      }
-      Outputs {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onDeleteComponent = /* GraphQL */ `
-  subscription OnDeleteComponent {
-    onDeleteComponent {
-      id
-      name
-      width
-      height
-      Items {
-        nextToken
-        startedAt
-      }
-      Inputs {
-        nextToken
-        startedAt
-      }
-      Outputs {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onCreateSpellAccess = /* GraphQL */ `
-  subscription OnCreateSpellAccess {
-    onCreateSpellAccess {
-      id
-      spell_id
-      class_id
-      subclass_id
-      race_id
-      level
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onUpdateSpellAccess = /* GraphQL */ `
-  subscription OnUpdateSpellAccess {
-    onUpdateSpellAccess {
-      id
-      spell_id
-      class_id
-      subclass_id
-      race_id
-      level
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onDeleteSpellAccess = /* GraphQL */ `
-  subscription OnDeleteSpellAccess {
-    onDeleteSpellAccess {
-      id
-      spell_id
-      class_id
-      subclass_id
-      race_id
-      level
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onCreateFeatures = /* GraphQL */ `
-  subscription OnCreateFeatures {
-    onCreateFeatures {
-      id
-      name
-      description
-      FeaturesByClasses {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onUpdateFeatures = /* GraphQL */ `
-  subscription OnUpdateFeatures {
-    onUpdateFeatures {
-      id
-      name
-      description
-      FeaturesByClasses {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onDeleteFeatures = /* GraphQL */ `
-  subscription OnDeleteFeatures {
-    onDeleteFeatures {
-      id
-      name
-      description
-      FeaturesByClasses {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onCreateFeaturesByClass = /* GraphQL */ `
-  subscription OnCreateFeaturesByClass {
-    onCreateFeaturesByClass {
-      id
-      subclass_id
-      feature_id
-      featuresID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onUpdateFeaturesByClass = /* GraphQL */ `
-  subscription OnUpdateFeaturesByClass {
-    onUpdateFeaturesByClass {
-      id
-      subclass_id
-      feature_id
-      featuresID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onDeleteFeaturesByClass = /* GraphQL */ `
-  subscription OnDeleteFeaturesByClass {
-    onDeleteFeaturesByClass {
-      id
-      subclass_id
-      feature_id
-      featuresID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onCreateSpells = /* GraphQL */ `
-  subscription OnCreateSpells {
-    onCreateSpells {
-      id
-      name
-      spell_lvl
-      cast_time
-      range
-      verbal
-      somatic
-      material
-      duration
-      concentration
-      school
-      description
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onUpdateSpells = /* GraphQL */ `
-  subscription OnUpdateSpells {
-    onUpdateSpells {
-      id
-      name
-      spell_lvl
-      cast_time
-      range
-      verbal
-      somatic
-      material
-      duration
-      concentration
-      school
-      description
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onDeleteSpells = /* GraphQL */ `
-  subscription OnDeleteSpells {
-    onDeleteSpells {
-      id
-      name
-      spell_lvl
-      cast_time
-      range
-      verbal
-      somatic
-      material
-      duration
-      concentration
-      school
-      description
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onCreateClasses = /* GraphQL */ `
-  subscription OnCreateClasses {
-    onCreateClasses {
-      id
-      name
-      save_1
-      save_2
-      skill_no
-      spellcasting
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onUpdateClasses = /* GraphQL */ `
-  subscription OnUpdateClasses {
-    onUpdateClasses {
-      id
-      name
-      save_1
-      save_2
-      skill_no
-      spellcasting
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onDeleteClasses = /* GraphQL */ `
-  subscription OnDeleteClasses {
-    onDeleteClasses {
-      id
-      name
-      save_1
-      save_2
-      skill_no
-      spellcasting
       createdAt
       updatedAt
       _version

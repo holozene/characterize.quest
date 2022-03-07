@@ -5,6 +5,7 @@
     <title>Characterize</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="icon" type="image/png" href="9b0fdeea90c27d94566d.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <style>
       :root {
         --component-size: 54px;
@@ -54,6 +55,199 @@
         /*max(50vw - calc(505px + var(--menu-min)), 10px);*/
         background-color: firebrick;
         z-index: 3;
+      }
+
+      #background {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 100%;
+        overflow: hidden;
+        background-image: url("9219b4261ec49822ec2d.jpg");
+        background-size: cover;
+        background-color: #c7c6c9;
+      }
+
+      #pageMain {
+        box-sizing: border-box;
+        width: 770px;
+        height: 800px;
+        margin-left: max(50vw - 375px, 0px);
+        margin-top: max(50vh - 325px, 40px);
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+        border-radius: 20px;
+        color: #ffffff;
+        background-color: #e2e2e2b0;
+      }
+
+      .p1 {
+        padding-top: 0px;
+        margin: 0px;
+        font-family: "copperplate";
+        font-size: 80px;
+      }
+
+      .p2 {
+        padding-top: 0px;
+        margin: 0px;
+        font-family: "copperplate";
+        font-size: 40px;
+      }
+
+      .p3 {
+        top: 270px;
+        left: 260px;
+        font-family: "monaco";
+        font-size: large;
+      }
+
+      .swords {
+        display: flex;
+        flex: auto;
+        justify-content: center;
+        color: #0000;
+        transition-delay: 0.75s;
+        transition: 0.75s;
+        cursor: pointer;
+        max-height: 80px;
+      }
+
+      .sword1 {
+        height: 80px;
+        width: 80px;
+        z-index: 2;
+        transform: translateX(53px) rotateZ(225deg);
+        transition-delay: 0.75s;
+        transition: 0.75s;
+      }
+
+      .swords:hover .sword1 {
+        transform: translateX(20px) rotateZ(180deg);
+        transition-delay: 0.75s;
+        transition: 0.75s;
+      }
+
+      .sword2 {
+        height: 80px;
+        width: 80px;
+        z-index: 2;
+        transform: translateX(-53px) rotateZ(135deg);
+        transition-delay: 0.75s;
+        transition: 0.75s;
+      }
+
+      .swords:hover .sword2 {
+        transform: translateX(-20px) rotateZ(180deg);
+        transition-delay: 0.75s;
+        transition: 0.75s;
+      }
+
+      @keyframes swing1 {
+        0% {
+          transform: translateX(20px) rotateZ(180deg);
+          z-index: 2;
+        }
+        25% {
+          transform: translateX(67px) rotateZ(225deg);
+          z-index: 2;
+        }
+        46% {
+          transform: translateX(20px) rotateZ(180deg);
+          z-index: 2;
+        }
+        50% {
+          transform: translateX(20px) rotateZ(180deg);
+          z-index: 3;
+        }
+        75% {
+          transform: translateX(70px) rotateZ(225deg);
+          z-index: 3;
+        }
+        96% {
+          transform: translateX(20px) rotateZ(180deg);
+          z-index: 3;
+        }
+        100% {
+          transform: translateX(20px) rotateZ(180deg);
+          z-index: 2;
+        }
+      }
+
+      @keyframes swing2 {
+        0% {
+          transform: translateX(-20px) rotateZ(180deg);
+          z-index: 2;
+        }
+        25% {
+          transform: translateX(-70px) rotateZ(135deg);
+          z-index: 2;
+        }
+        46% {
+          transform: translateX(-20px) rotateZ(180deg);
+          z-index: 2;
+        }
+        50% {
+          transform: translateX(-20px) rotateZ(180deg);
+          z-index: 1;
+        }
+        75% {
+          transform: translateX(-67px) rotateZ(135deg);
+          z-index: 1;
+        }
+        96% {
+          transform: translateX(-20px) rotateZ(180deg);
+          z-index: 1;
+        }
+        100% {
+          transform: translateX(-20px) rotateZ(180deg);
+          z-index: 2;
+        }
+      }
+
+      .p4 {
+        margin: 0px;
+        margin-top: 10px;
+        margin-bottom: auto;
+        width: min-content;
+        text-decoration: none;
+        font-family: "monaco";
+        font-size: 13px;
+        z-index: 2;
+        background: none;
+        color: #0000;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition-delay: 0.75s;
+        transition: 0.75s;
+      }
+
+      .swords:hover .p4 {
+        color: indianred;
+        border: 1px solid indianred;
+        transition-delay: 0.75s;
+        transition: 0.75s;
+      }
+
+      .p5 {
+        font-size: 20px;
+        margin-top: 385px;
+        color: white;
+      }
+
+      .fa-github {
+        font-size: 20px;
+        color: indianred;
+      }
+
+      :link {
+        color: indianred;
       }
 
       .width-scroller {
@@ -181,7 +375,7 @@
         background-color: #dbceb6;
         border: 2px solid #dbceb6;
         border-radius: 5px;
-        box-shadow: 1px 1px 1px #7777;
+        /* box-shadow: 1px 1px 1px #7777; */
         z-index: 1;
       }
 
@@ -244,35 +438,9 @@
     </style>
   </head>
 
-  <body>
-    <div id="topBar" class="bar">
-      <img
-        id="page-icon"
-        class="bar-item"
-        src="9b0fdeea90c27d94566d.png"
-        width="23"
-        height="23"
-        style="border-radius: 3px"
-      />
-      <div class="bar-item">Characterize</div>
-    </div>
-    <div class="width-scroller"></div>
-    <div id="sheetMain" class="sheet-main container">
-      <!--Sheet dropzones and components will be generated here-->
-    </div>
-    <div class="component-menu">
-      <div class="menu-top container">
-        <div id="trash" class="trash dropzone">
-          <img id="trashimg" class="trashimg" src="cf8ccf327e4eeffd39e1.png" />
-        </div>
-      </div>
-      <div id="componentMenu" class="container menu-container">
-        <!--Component options will be generated here-->
-      </div>
-    </div>
-    <script src="component.bundle.js"></script>
-    <script src="character.bundle.js"></script>
-    <script src="sheet.bundle.js"></script>
-    <script src="app.bundle.js"></script>
-  </body>
+  <body></body>
+  <script src="component.bundle.js"></script>
+  <script src="character.bundle.js"></script>
+  <script src="sheet.bundle.js"></script>
+  <script src="app.bundle.js"></script>
 </html>

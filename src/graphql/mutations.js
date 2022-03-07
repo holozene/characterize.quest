@@ -1,6 +1,234 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createCharacter5e = /* GraphQL */ `
+  mutation CreateCharacter5e(
+    $input: CreateCharacter5eInput!
+    $condition: ModelCharacter5eConditionInput
+  ) {
+    createCharacter5e(input: $input, condition: $condition) {
+      id
+      charName
+      playerName
+      str
+      dex
+      con
+      int
+      wis
+      cha
+      ComponentPositions {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateCharacter5e = /* GraphQL */ `
+  mutation UpdateCharacter5e(
+    $input: UpdateCharacter5eInput!
+    $condition: ModelCharacter5eConditionInput
+  ) {
+    updateCharacter5e(input: $input, condition: $condition) {
+      id
+      charName
+      playerName
+      str
+      dex
+      con
+      int
+      wis
+      cha
+      ComponentPositions {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteCharacter5e = /* GraphQL */ `
+  mutation DeleteCharacter5e(
+    $input: DeleteCharacter5eInput!
+    $condition: ModelCharacter5eConditionInput
+  ) {
+    deleteCharacter5e(input: $input, condition: $condition) {
+      id
+      charName
+      playerName
+      str
+      dex
+      con
+      int
+      wis
+      cha
+      ComponentPositions {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createComponentPosition = /* GraphQL */ `
+  mutation CreateComponentPosition(
+    $input: CreateComponentPositionInput!
+    $condition: ModelComponentPositionConditionInput
+  ) {
+    createComponentPosition(input: $input, condition: $condition) {
+      id
+      x
+      y
+      characterID
+      componentID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateComponentPosition = /* GraphQL */ `
+  mutation UpdateComponentPosition(
+    $input: UpdateComponentPositionInput!
+    $condition: ModelComponentPositionConditionInput
+  ) {
+    updateComponentPosition(input: $input, condition: $condition) {
+      id
+      x
+      y
+      characterID
+      componentID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteComponentPosition = /* GraphQL */ `
+  mutation DeleteComponentPosition(
+    $input: DeleteComponentPositionInput!
+    $condition: ModelComponentPositionConditionInput
+  ) {
+    deleteComponentPosition(input: $input, condition: $condition) {
+      id
+      x
+      y
+      characterID
+      componentID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createComponent = /* GraphQL */ `
+  mutation CreateComponent(
+    $input: CreateComponentInput!
+    $condition: ModelComponentConditionInput
+  ) {
+    createComponent(input: $input, condition: $condition) {
+      id
+      name
+      width
+      height
+      Items {
+        nextToken
+        startedAt
+      }
+      Inputs {
+        nextToken
+        startedAt
+      }
+      Outputs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateComponent = /* GraphQL */ `
+  mutation UpdateComponent(
+    $input: UpdateComponentInput!
+    $condition: ModelComponentConditionInput
+  ) {
+    updateComponent(input: $input, condition: $condition) {
+      id
+      name
+      width
+      height
+      Items {
+        nextToken
+        startedAt
+      }
+      Inputs {
+        nextToken
+        startedAt
+      }
+      Outputs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteComponent = /* GraphQL */ `
+  mutation DeleteComponent(
+    $input: DeleteComponentInput!
+    $condition: ModelComponentConditionInput
+  ) {
+    deleteComponent(input: $input, condition: $condition) {
+      id
+      name
+      width
+      height
+      Items {
+        nextToken
+        startedAt
+      }
+      Inputs {
+        nextToken
+        startedAt
+      }
+      Outputs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const createComponentItem = /* GraphQL */ `
   mutation CreateComponentItem(
     $input: CreateComponentItemInput!
@@ -194,411 +422,6 @@ export const deleteComponentOutput = /* GraphQL */ `
       variable
       style
       componentID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const createComponent = /* GraphQL */ `
-  mutation CreateComponent(
-    $input: CreateComponentInput!
-    $condition: ModelComponentConditionInput
-  ) {
-    createComponent(input: $input, condition: $condition) {
-      id
-      name
-      width
-      height
-      Items {
-        nextToken
-        startedAt
-      }
-      Inputs {
-        nextToken
-        startedAt
-      }
-      Outputs {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const updateComponent = /* GraphQL */ `
-  mutation UpdateComponent(
-    $input: UpdateComponentInput!
-    $condition: ModelComponentConditionInput
-  ) {
-    updateComponent(input: $input, condition: $condition) {
-      id
-      name
-      width
-      height
-      Items {
-        nextToken
-        startedAt
-      }
-      Inputs {
-        nextToken
-        startedAt
-      }
-      Outputs {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const deleteComponent = /* GraphQL */ `
-  mutation DeleteComponent(
-    $input: DeleteComponentInput!
-    $condition: ModelComponentConditionInput
-  ) {
-    deleteComponent(input: $input, condition: $condition) {
-      id
-      name
-      width
-      height
-      Items {
-        nextToken
-        startedAt
-      }
-      Inputs {
-        nextToken
-        startedAt
-      }
-      Outputs {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const createSpellAccess = /* GraphQL */ `
-  mutation CreateSpellAccess(
-    $input: CreateSpellAccessInput!
-    $condition: ModelSpellAccessConditionInput
-  ) {
-    createSpellAccess(input: $input, condition: $condition) {
-      id
-      spell_id
-      class_id
-      subclass_id
-      race_id
-      level
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const updateSpellAccess = /* GraphQL */ `
-  mutation UpdateSpellAccess(
-    $input: UpdateSpellAccessInput!
-    $condition: ModelSpellAccessConditionInput
-  ) {
-    updateSpellAccess(input: $input, condition: $condition) {
-      id
-      spell_id
-      class_id
-      subclass_id
-      race_id
-      level
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const deleteSpellAccess = /* GraphQL */ `
-  mutation DeleteSpellAccess(
-    $input: DeleteSpellAccessInput!
-    $condition: ModelSpellAccessConditionInput
-  ) {
-    deleteSpellAccess(input: $input, condition: $condition) {
-      id
-      spell_id
-      class_id
-      subclass_id
-      race_id
-      level
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const createFeatures = /* GraphQL */ `
-  mutation CreateFeatures(
-    $input: CreateFeaturesInput!
-    $condition: ModelFeaturesConditionInput
-  ) {
-    createFeatures(input: $input, condition: $condition) {
-      id
-      name
-      description
-      FeaturesByClasses {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const updateFeatures = /* GraphQL */ `
-  mutation UpdateFeatures(
-    $input: UpdateFeaturesInput!
-    $condition: ModelFeaturesConditionInput
-  ) {
-    updateFeatures(input: $input, condition: $condition) {
-      id
-      name
-      description
-      FeaturesByClasses {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const deleteFeatures = /* GraphQL */ `
-  mutation DeleteFeatures(
-    $input: DeleteFeaturesInput!
-    $condition: ModelFeaturesConditionInput
-  ) {
-    deleteFeatures(input: $input, condition: $condition) {
-      id
-      name
-      description
-      FeaturesByClasses {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const createFeaturesByClass = /* GraphQL */ `
-  mutation CreateFeaturesByClass(
-    $input: CreateFeaturesByClassInput!
-    $condition: ModelFeaturesByClassConditionInput
-  ) {
-    createFeaturesByClass(input: $input, condition: $condition) {
-      id
-      subclass_id
-      feature_id
-      featuresID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const updateFeaturesByClass = /* GraphQL */ `
-  mutation UpdateFeaturesByClass(
-    $input: UpdateFeaturesByClassInput!
-    $condition: ModelFeaturesByClassConditionInput
-  ) {
-    updateFeaturesByClass(input: $input, condition: $condition) {
-      id
-      subclass_id
-      feature_id
-      featuresID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const deleteFeaturesByClass = /* GraphQL */ `
-  mutation DeleteFeaturesByClass(
-    $input: DeleteFeaturesByClassInput!
-    $condition: ModelFeaturesByClassConditionInput
-  ) {
-    deleteFeaturesByClass(input: $input, condition: $condition) {
-      id
-      subclass_id
-      feature_id
-      featuresID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const createSpells = /* GraphQL */ `
-  mutation CreateSpells(
-    $input: CreateSpellsInput!
-    $condition: ModelSpellsConditionInput
-  ) {
-    createSpells(input: $input, condition: $condition) {
-      id
-      name
-      spell_lvl
-      cast_time
-      range
-      verbal
-      somatic
-      material
-      duration
-      concentration
-      school
-      description
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const updateSpells = /* GraphQL */ `
-  mutation UpdateSpells(
-    $input: UpdateSpellsInput!
-    $condition: ModelSpellsConditionInput
-  ) {
-    updateSpells(input: $input, condition: $condition) {
-      id
-      name
-      spell_lvl
-      cast_time
-      range
-      verbal
-      somatic
-      material
-      duration
-      concentration
-      school
-      description
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const deleteSpells = /* GraphQL */ `
-  mutation DeleteSpells(
-    $input: DeleteSpellsInput!
-    $condition: ModelSpellsConditionInput
-  ) {
-    deleteSpells(input: $input, condition: $condition) {
-      id
-      name
-      spell_lvl
-      cast_time
-      range
-      verbal
-      somatic
-      material
-      duration
-      concentration
-      school
-      description
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const createClasses = /* GraphQL */ `
-  mutation CreateClasses(
-    $input: CreateClassesInput!
-    $condition: ModelClassesConditionInput
-  ) {
-    createClasses(input: $input, condition: $condition) {
-      id
-      name
-      save_1
-      save_2
-      skill_no
-      spellcasting
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const updateClasses = /* GraphQL */ `
-  mutation UpdateClasses(
-    $input: UpdateClassesInput!
-    $condition: ModelClassesConditionInput
-  ) {
-    updateClasses(input: $input, condition: $condition) {
-      id
-      name
-      save_1
-      save_2
-      skill_no
-      spellcasting
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const deleteClasses = /* GraphQL */ `
-  mutation DeleteClasses(
-    $input: DeleteClassesInput!
-    $condition: ModelClassesConditionInput
-  ) {
-    deleteClasses(input: $input, condition: $condition) {
-      id
-      name
-      save_1
-      save_2
-      skill_no
-      spellcasting
       createdAt
       updatedAt
       _version
