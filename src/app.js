@@ -54,6 +54,8 @@ export async function newSheet() {
   document.getElementsByClassName("p4")[0].style.marginTop = "23px";
   if (urlParams.get("mode") != "testing") {
     try {
+      Amplify.configure(awsconfig);
+      console.debug(await DataStore.query(Component, c => c.name("contains", "How-To")));
       let comp = await DataStore.query(Component, c => c.name("contains", "How-To"));
       let char = await DataStore.save(
         new Character5e({
@@ -63,7 +65,7 @@ export async function newSheet() {
       await DataStore.save(
         new ComponentPosition({
           characterID: char.id,
-          componentID: comp.id,
+          componentID: "e7a4a7d7-fb46-48a8-9b2b-39fb9ff55983",
           x: 5,
           y: 3,
         })
