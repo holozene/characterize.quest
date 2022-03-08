@@ -1,6 +1,6 @@
-import Amplify, { API, graphqlOperation } from "aws-amplify";
-import awsconfig from "../aws-exports.js";
-import { DataStore } from "aws-amplify";
+import Amplify from "@aws-amplify/core";
+import awsconfig from "../aws-exports";
+import { DataStore, Predicates } from "@aws-amplify/datastore";
 import { Character5e, ComponentPosition, Component, ComponentItem, ComponentInput, ComponentOutput } from "../models";
 import * as Draggable from "@shopify/draggable";
 import * as c from "./component";
@@ -56,6 +56,7 @@ export class Sheet {
   static character;
 
   constructor(id = undefined) {
+    Amplify.configure(awsconfig);
     this.id = id;
     this.sheet = [];
     this.menu = [];
@@ -272,7 +273,7 @@ export class Sheet {
         })
       );
       newComp.posId = query.id;
-      this.sheet.push(newComp)
+      this.sheet.push(newComp);
       console.debug("ComponentPosition saved successfully", query.id);
     } catch (error) {
       console.debug("Error saving ComponentPosition", error);

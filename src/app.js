@@ -1,4 +1,6 @@
-import { DataStore } from "aws-amplify";
+import Amplify from "@aws-amplify/core";
+import awsconfig from "./aws-exports";
+import { DataStore, Predicates } from "@aws-amplify/datastore";
 import { Character5e, ComponentPosition, Component } from "./models";
 import * as s from "./classes/sheet";
 import Icon from "../assets/logo.png";
@@ -6,14 +8,15 @@ import Trash from "../assets/trash.png";
 import Sword from "../assets/sword.svg";
 import Background from "../assets/background.jpg";
 
+Amplify.configure(awsconfig);
 var characterSheet;
-
 const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.has("id") && urlParams.get("mode") != "testing") {
+
+if (urlParams.has("id")) {
   // load existing sheet
   characterSheet = new s.Sheet(urlParams.get("id"));
 } else {
-  // no sheet selected (or in testing mode), prompt to create new sheet
+  // no sheet selected, prompt to create new sheet
   let page = /* html */ ` 
   <div id="topBar" class="bar">
     <img class="bar-item" src="9b0fdeea90c27d94566d.png" width="23" height="23" style="border-radius: 3px" />
@@ -65,12 +68,12 @@ export async function newSheet() {
           y: 3,
         })
       );
-      console.debug("Character saved successfully!", char.id);
+      console.debug("Character created successfully!", char.id);
       urlParams.set("id", char.id);
       console.debug(urlParams.toString());
       window.location.search = urlParams;
     } catch (error) {
-      console.debug("Error saving Character", error);
+      console.debug("Error creating Character", error);
     }
   } else
     console.debug(
