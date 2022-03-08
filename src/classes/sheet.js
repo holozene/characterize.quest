@@ -55,8 +55,8 @@ export class Sheet {
 
   static character;
 
-  constructor(key = undefined) {
-    this.key = key;
+  constructor(id = undefined) {
+    this.id = id;
     this.sheet = [];
     this.menu = [];
     this.loadCharacter();
@@ -65,16 +65,9 @@ export class Sheet {
   // load the Character and on success generate the sheet, load the Menu and initialize Droppable
   async loadCharacter() {
     try {
-      const c5e = await DataStore.query(Character5e, this.key);
-      console.debug("Loaded Character", c5e);
-
-      this.genSheet();
-      this.loadMenu();
-      this.droppable = this.initDroppable();
-
-      const compPos = await DataStore.query(ComponentPosition, c => c.characterID("eq", c5e.id));
-      compPos.forEach(cP => this.loadComponentPos(cP));
-
+      console.debug("All Characters", await DataStore.query(Character5e));
+      const c5e = await DataStore.query(Character5e, this.id);
+      console.debug("Loading Character", c5e);
       Sheet.character = new char.Character(
         c5e.charName,
         c5e.playerName,
@@ -85,6 +78,15 @@ export class Sheet {
         c5e.wis,
         c5e.cha
       );
+      console.debug("Loaded Character", Sheet.character);
+
+      this.genSheet();
+      this.loadMenu();
+
+      const compPos = await DataStore.query(ComponentPosition, c => c.characterID("eq", c5e.id));
+      compPos.forEach(cP => this.loadComponentPos(cP));
+
+      this.droppable = this.initDroppable();
     } catch (error) {
       console.debug("Error loading Character", error);
       let page = /* html */ `
@@ -113,49 +115,63 @@ export class Sheet {
 
   // load a Component with its position into Sheet
   async loadComponentPos(cP) {
-    const component = await DataStore.query(Component, c => c.id("eq", cP.componentID));
-    const comp = component[0];
+    try {
+      const component = await DataStore.query(Component, c => c.id("eq", cP.componentID));
+      console.debug("Loading component and compPos", component[0], cP);
+      const comp = component[0];
 
-    let itemList = [];
-    const items = await DataStore.query(ComponentItem, c => c.componentID("eq", cP.componentID));
-    items.forEach(i => itemList.push(new c.Item(i.x, i.y, i.width, i.height, i.content, i.style)));
+      let itemList = [];
+      const items = await DataStore.query(ComponentItem, c => c.componentID("eq", cP.componentID));
+      items.forEach(i => itemList.push(new c.Item(i.x, i.y, i.width, i.height, i.content, i.style)));
 
-    const inputs = await DataStore.query(ComponentInput, c => c.componentID("eq", cP.componentID));
-    inputs.forEach(i =>
-      itemList.push(new c.Input(i.x, i.y, i.width, i.height, i.type, i.variable, i.style, this.character))
-    );
+      const inputs = await DataStore.query(ComponentInput, c => c.componentID("eq", cP.componentID));
+      inputs.forEach(i =>
+        itemList.push(new c.Input(i.x, i.y, i.width, i.height, i.type, i.variable, i.style, this.character))
+      );
 
-    const outputs = await DataStore.query(ComponentOutput, c => c.componentID("eq", cP.componentID));
-    outputs.forEach(i => itemList.push(new c.Output(i.x, i.y, i.width, i.height, i.variable, i.style)));
+      const outputs = await DataStore.query(ComponentOutput, c => c.componentID("eq", cP.componentID));
+      outputs.forEach(i => itemList.push(new c.Output(i.x, i.y, i.width, i.height, i.variable, i.style)));
 
-    const newComp = new c.Component(comp.name, comp.width, comp.height, itemList, comp.id, cP.id, cP.x, cP.y);
-    console.debug("Loaded Sheet Component", newComp);
-    this.sheet.push(newComp);
+      const newComp = new c.Component(comp.name, comp.width, comp.height, itemList, comp.id, cP.id, cP.x, cP.y);
+      this.sheet.push(newComp);
+      console.debug("Loaded Sheet Component", newComp);
+    } catch (error) {
+      console.debug("Error loading Sheet Component", error);
+    }
   }
 
   // load Component options into Menu
   async loadMenu() {
-    const component = await DataStore.query(Component, c => c.showInMenu("eq", true));
-    component.forEach(comp => this.loadComponent(comp));
+    try {
+      console.debug("All Components", await DataStore.query(Component));
+      const component = await DataStore.query(Component, c => c.showInMenu("eq", true));
+      component.forEach(comp => this.loadComponent(comp));
+    } catch (error) {
+      console.debug("Error loading Sheet Component", error);
+    }
   }
 
   // load a Component into Menu
   async loadComponent(comp) {
-    let itemList = [];
-    const items = await DataStore.query(ComponentItem, c => c.componentID("eq", comp.id));
-    items.forEach(i => itemList.push(new c.Item(i.x, i.y, i.width, i.height, i.content, i.style)));
+    try {
+      let itemList = [];
+      const items = await DataStore.query(ComponentItem, c => c.componentID("eq", comp.id));
+      items.forEach(i => itemList.push(new c.Item(i.x, i.y, i.width, i.height, i.content, i.style)));
 
-    const inputs = await DataStore.query(ComponentInput, c => c.componentID("eq", comp.id));
-    inputs.forEach(i =>
-      itemList.push(new c.Input(i.x, i.y, i.width, i.height, i.type, i.variable, i.style, this.character))
-    );
+      const inputs = await DataStore.query(ComponentInput, c => c.componentID("eq", comp.id));
+      inputs.forEach(i =>
+        itemList.push(new c.Input(i.x, i.y, i.width, i.height, i.type, i.variable, i.style, this.character))
+      );
 
-    const outputs = await DataStore.query(ComponentOutput, c => c.componentID("eq", comp.id));
-    outputs.forEach(i => itemList.push(new c.Output(i.x, i.y, i.width, i.height, i.variable, i.style)));
+      const outputs = await DataStore.query(ComponentOutput, c => c.componentID("eq", comp.id));
+      outputs.forEach(i => itemList.push(new c.Output(i.x, i.y, i.width, i.height, i.variable, i.style)));
 
-    const newComp = new c.Component(comp.name, comp.width, comp.height, itemList, comp.id);
-    console.debug("Loaded Menu Component", newComp);
-    this.menu.push(newComp);
+      const newComp = new c.Component(comp.name, comp.width, comp.height, itemList, comp.id);
+      console.debug("Loaded Menu Component", newComp);
+      this.menu.push(newComp);
+    } catch (error) {
+      console.debug("Error loading Menu Component", error);
+    }
   }
 
   // generate sheet, menu and dropzones
@@ -251,11 +267,12 @@ export class Sheet {
         new ComponentPosition({
           x: x,
           y: y,
-          characterID: this.key,
+          characterID: this.id,
           componentID: id,
         })
       );
       newComp.posId = query.id;
+      this.sheet.push(newComp)
       console.debug("ComponentPosition saved successfully", query.id);
     } catch (error) {
       console.debug("Error saving ComponentPosition", error);

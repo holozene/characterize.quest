@@ -1,5 +1,5 @@
 import { DataStore } from "aws-amplify";
-import { Character5e, ComponentPosition } from "./models";
+import { Character5e, ComponentPosition, Component } from "./models";
 import * as s from "./classes/sheet";
 import Icon from "../assets/logo.png";
 import Trash from "../assets/trash.png";
@@ -9,9 +9,9 @@ import Background from "../assets/background.jpg";
 var characterSheet;
 
 const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.has("key") && urlParams.get("mode") != "testing") {
+if (urlParams.has("id") && urlParams.get("mode") != "testing") {
   // load existing sheet
-  characterSheet = new s.Sheet(urlParams.get("key"));
+  characterSheet = new s.Sheet(urlParams.get("id"));
 } else {
   // no sheet selected (or in testing mode), prompt to create new sheet
   let page = /* html */ ` 
@@ -51,21 +51,22 @@ export async function newSheet() {
   document.getElementsByClassName("p4")[0].style.marginTop = "23px";
   if (urlParams.get("mode") != "testing") {
     try {
-      let query = await DataStore.save(
+      let comp = await DataStore.query(Component, c => c.name("contains", "How-To"));
+      let char = await DataStore.save(
         new Character5e({
           charName: "New Character!",
         })
       );
       await DataStore.save(
         new ComponentPosition({
-          characterID: query.id,
-          componentID: "e7a4a7d7-fb46-48a8-9b2b-39fb9ff55983",
+          characterID: char.id,
+          componentID: comp.id,
           x: 5,
           y: 3,
         })
       );
-      console.debug("Character saved successfully!", query.id);
-      urlParams.set("key", query.id);
+      console.debug("Character saved successfully!", char.id);
+      urlParams.set("id", char.id);
       console.debug(urlParams.toString());
       window.location.search = urlParams;
     } catch (error) {

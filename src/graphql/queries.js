@@ -180,6 +180,7 @@ export const getComponent = /* GraphQL */ `
         nextToken
         startedAt
       }
+      showInMenu
       createdAt
       updatedAt
       _version
@@ -200,6 +201,7 @@ export const listComponents = /* GraphQL */ `
         name
         width
         height
+        showInMenu
         createdAt
         updatedAt
         _version
@@ -229,6 +231,7 @@ export const syncComponents = /* GraphQL */ `
         name
         width
         height
+        showInMenu
         createdAt
         updatedAt
         _version

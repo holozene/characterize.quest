@@ -140,6 +140,7 @@ export const onCreateComponent = /* GraphQL */ `
         nextToken
         startedAt
       }
+      showInMenu
       createdAt
       updatedAt
       _version
@@ -167,6 +168,7 @@ export const onUpdateComponent = /* GraphQL */ `
         nextToken
         startedAt
       }
+      showInMenu
       createdAt
       updatedAt
       _version
@@ -194,6 +196,7 @@ export const onDeleteComponent = /* GraphQL */ `
         nextToken
         startedAt
       }
+      showInMenu
       createdAt
       updatedAt
       _version
