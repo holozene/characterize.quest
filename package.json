@@ -19,8 +19,6 @@
     },
     "scripts": {
         "start": "webpack && webpack-dev-server --mode development",
-        "build": "webpack --mode=production",
-        "amplify-modelgen": "node amplify/scripts/amplify-modelgen.js",
-        "amplify-push": "node amplify/scripts/amplify-push.js"
+        "build": "webpack --mode=production"
     }
 }
