@@ -9,50 +9,6 @@ import * as queries from "../graphql/queries";
 import * as mutations from "../graphql/mutations";
 
 export class Sheet {
-  components = /* GraphQL */ `
-    query {
-      listComponents {
-        items {
-          id
-          name
-          width
-          height
-          Items {
-            items {
-              x
-              y
-              width
-              height
-              content
-              style
-            }
-          }
-          Inputs {
-            items {
-              x
-              y
-              width
-              height
-              type
-              variable
-              style
-            }
-          }
-          Outputs {
-            items {
-              x
-              y
-              width
-              height
-              variable
-              style
-            }
-          }
-        }
-      }
-    }
-  `;
-
   static character;
 
   constructor(id = undefined) {
@@ -61,24 +17,16 @@ export class Sheet {
     this.sheet = [];
     this.menu = [];
     this.loadCharacter();
+    this.characterSubscription();
+    this.positionSubscription();
   }
 
   // load the Character and on success generate the sheet, load the Menu and initialize Droppable
   async loadCharacter() {
     try {
-      console.debug("All Characters", await DataStore.query(Character5e));
+      // console.debug("All Characters", await DataStore.query(Character5e));
       const c5e = await DataStore.query(Character5e, this.id);
-      console.debug("Loading Character", c5e);
-      Sheet.character = new char.Character(
-        c5e.charName,
-        c5e.playerName,
-        c5e.str,
-        c5e.dex,
-        c5e.con,
-        c5e.int,
-        c5e.wis,
-        c5e.cha
-      );
+      Sheet.character = new char.Character(c5e);
       console.debug("Loaded Character", Sheet.character);
 
       this.genSheet();
@@ -114,11 +62,80 @@ export class Sheet {
     }
   }
 
+  characterSubscription() {
+    const subscription = DataStore.observe(Character5e, this.id).subscribe(msg => {
+      try {
+        const changedVarName =
+          JSON.stringify(msg.element).match(/[{]"([^i][^"]*?|.[^d][^"]*?|i)":/) == null
+            ? ""
+            : JSON.stringify(msg.element).match(/[{]"([^i][^"]*?|.[^d][^"]*?|i)":/)[1];
+        console.debug("message", msg.opType, changedVarName, msg.element);
+        Sheet.character.c5e = Character5e.copyOf(
+          Sheet.character.c5e,
+          updated => (updated[changedVarName] = msg.element[changedVarName])
+        );
+        if (changedVarName == "inspiration") {
+          Array.from(document.getElementsByClassName(changedVarName)).forEach(
+            elem => (elem.checked = msg.element[changedVarName])
+          );
+        } else {
+          Array.from(document.getElementsByClassName(changedVarName)).forEach(
+            elem => (elem.value = msg.element[changedVarName])
+          );
+        }
+      } catch (error) {
+        console.debug(error.name, "while syncing character changes:", error.message);
+      }
+    });
+  }
+
+  positionSubscription() {
+    const subscription = DataStore.observe(ComponentPosition, c => c.characterID("eq", this.id)).subscribe(msg => {
+      try {
+        console.debug(
+          "message",
+          msg,
+          msg.element.id,
+          c.Component.findByPosId(msg.element.id, this.sheet),
+          msg.element.x,
+          msg.element.y
+        );
+        if (msg.opType == "UPDATE") {
+          c.Component.findByPosId(msg.element.id, this.sheet).setPos(msg.element.x, msg.element.y);
+        } else if (msg.opType == "INSERT") {
+          let comp = c.Component.findById(msg.element.componentID, this.menu);
+          const newComp = new c.Component(
+            comp.name,
+            comp.width,
+            comp.height,
+            comp.items,
+            comp.id,
+            msg.element.id,
+            msg.element.x,
+            msg.element.y
+          );
+          this.sheet.push(newComp);
+        } else if (msg.opType == "DELETE") {
+          try {
+            const compHtml = document.getElementsByClassName(msg.element.id)[0];
+            compHtml.parentNode.className = "dropzone sheet-zone";
+            compHtml.remove();
+            this.sheet = this.sheet.filter(c => c.posId !== msg.element.id);
+          } catch (error) {
+            console.debug(error.name, "updating html from db delete:", error.message);
+          }
+        }
+      } catch (error) {
+        console.debug(error.name, "while syncing component changes:", error.message);
+      }
+    });
+  }
+
   // load a Component with its position into Sheet
   async loadComponentPos(cP) {
     try {
       const component = await DataStore.query(Component, c => c.id("eq", cP.componentID));
-      console.debug("Loading component and compPos", component[0], cP);
+      // console.debug("Loading component and compPos", component[0], cP);
       const comp = component[0];
 
       let itemList = [];
@@ -144,7 +161,7 @@ export class Sheet {
   // load Component options into Menu
   async loadMenu() {
     try {
-      console.debug("All Components", await DataStore.query(Component));
+      // console.debug("All Components", await DataStore.query(Component));
       const component = await DataStore.query(Component, c => c.showInMenu("eq", true));
       component.forEach(comp => this.loadComponent(comp));
     } catch (error) {
@@ -242,7 +259,7 @@ export class Sheet {
       const dropNum = Number(evt.data.dropzone.id.substring(5));
       if (evt.data.dropzone.classList[1] === "sheet-zone") {
         // if added to sheet from menu
-        if (evt.data.dragEvent.data.sourceContainer.id == "componentMenu")
+        if (evt.data.dragEvent.data.sourceContainer.id == "componentMenu" && posId == "undefined")
           this.addComp(id, dropNum % 17, Math.floor(dropNum / 17));
         // if moved on sheet
         else this.updateComp(posId, dropNum % 17, Math.floor(dropNum / 17));
@@ -262,7 +279,7 @@ export class Sheet {
   async addComp(id, x, y) {
     let comp = c.Component.findById(id, this.menu);
     comp.respawn();
-    const newComp = new c.Component(comp.name, comp.width, comp.height, comp.items, id, null, comp.x, comp.y);
+    // const newComp = new c.Component(comp.name, comp.width, comp.height, comp.items, id, null, comp.x, comp.y);
     try {
       let query = await DataStore.save(
         new ComponentPosition({
@@ -272,8 +289,8 @@ export class Sheet {
           componentID: id,
         })
       );
-      newComp.posId = query.id;
-      this.sheet.push(newComp);
+      // newComp.posId = query.id;
+      // this.sheet.push(newComp);
       console.debug("ComponentPosition saved successfully", query.id);
     } catch (error) {
       console.debug("Error saving ComponentPosition", error);
@@ -282,8 +299,8 @@ export class Sheet {
 
   async updateComp(posId, x, y) {
     let comp = c.Component.findByPosId(posId, this.sheet);
-    comp.x = x;
-    comp.y = y;
+    // comp.x = x;
+    // comp.y = y;
     try {
       let query = await DataStore.query(ComponentPosition, posId);
       await DataStore.save(
