@@ -17,6 +17,7 @@ export class Sheet {
     this.sheet = [];
     this.menu = [];
     this.loadCharacter();
+    this.characterSubscription();
     this.positionSubscription();
   }
 
@@ -25,16 +26,7 @@ export class Sheet {
     try {
       // console.debug("All Characters", await DataStore.query(Character5e));
       const c5e = await DataStore.query(Character5e, this.id);
-      Sheet.character = new char.Character(
-        c5e.charName,
-        c5e.playerName,
-        c5e.str,
-        c5e.dex,
-        c5e.con,
-        c5e.int,
-        c5e.wis,
-        c5e.cha
-      );
+      Sheet.character = new char.Character(c5e);
       console.debug("Loaded Character", Sheet.character);
 
       this.genSheet();
@@ -70,37 +62,62 @@ export class Sheet {
     }
   }
 
+  characterSubscription() {
+    const subscription = DataStore.observe(Character5e, this.id).subscribe(msg => {
+      try {
+        console.debug("message", JSON.stringify(msg.element).match(/[{]"([^i][^"]*?|.[^d][^"]*?|i)":/)[1], msg.element);
+        const changedVarName = JSON.stringify(msg.element).match(/[{,]"([^i][^"]*?|.[^d][^"]*?|i)":/)[1];
+        if (changedVarName == "inspiration") {
+          Sheet.character.c5e = msg.element;
+          Array.from(document.getElementsByClassName(changedVarName)).forEach(elem => (elem.checked = msg.element[changedVarName]));
+        } else {
+          Sheet.character.c5e = Character5e.copyOf(Sheet.character.c5e, updated => (updated[changedVarName] = msg.element[changedVarName]));
+          Array.from(document.getElementsByClassName(changedVarName)).forEach(elem => (elem.value = msg.element[changedVarName]));
+        }
+      } catch (error) {
+        console.debug(error.name, "while syncing character changes:", error.message);
+      }
+    });
+  }
 
   positionSubscription() {
     const subscription = DataStore.observe(ComponentPosition, c => c.characterID("eq", this.id)).subscribe(msg => {
-      console.debug(
-        "message",
-        msg,
-        msg.element.id,
-        c.Component.findByPosId(msg.element.id, this.sheet),
-        msg.element.x,
-        msg.element.y
-      );
-      if (msg.opType == "UPDATE") {
-        c.Component.findByPosId(msg.element.id, this.sheet).setPos(msg.element.x, msg.element.y);
-      } else if (msg.opType == "INSERT") {
-        let comp = c.Component.findById(msg.element.componentID, this.menu);
-        const newComp = new c.Component(
-          comp.name,
-          comp.width,
-          comp.height,
-          comp.items,
-          comp.id,
+      try {
+        console.debug(
+          "message",
+          msg,
           msg.element.id,
+          c.Component.findByPosId(msg.element.id, this.sheet),
           msg.element.x,
           msg.element.y
         );
-        this.sheet.push(newComp);
-      } else if (msg.opType == "DELETE") {
-        const compHtml = document.getElementsByClassName(msg.element.id)[0];
-        compHtml.parentNode.className = "dropzone sheet-zone";
-        compHtml.remove();
-        this.sheet = this.sheet.filter(c => c.posId !== msg.element.id);
+        if (msg.opType == "UPDATE") {
+          c.Component.findByPosId(msg.element.id, this.sheet).setPos(msg.element.x, msg.element.y);
+        } else if (msg.opType == "INSERT") {
+          let comp = c.Component.findById(msg.element.componentID, this.menu);
+          const newComp = new c.Component(
+            comp.name,
+            comp.width,
+            comp.height,
+            comp.items,
+            comp.id,
+            msg.element.id,
+            msg.element.x,
+            msg.element.y
+          );
+          this.sheet.push(newComp);
+        } else if (msg.opType == "DELETE") {
+          try {
+            const compHtml = document.getElementsByClassName(msg.element.id)[0];
+            compHtml.parentNode.className = "dropzone sheet-zone";
+            compHtml.remove();
+            this.sheet = this.sheet.filter(c => c.posId !== msg.element.id);
+          } catch (error) {
+            console.debug(error.name, "updating html from db delete:", error.message);
+          }
+        }
+      } catch (error) {
+        console.debug(error.name, "while syncing component changes:", error.message);
       }
     });
   }
@@ -233,7 +250,7 @@ export class Sheet {
       const dropNum = Number(evt.data.dropzone.id.substring(5));
       if (evt.data.dropzone.classList[1] === "sheet-zone") {
         // if added to sheet from menu
-        if (evt.data.dragEvent.data.sourceContainer.id == "componentMenu")
+        if (evt.data.dragEvent.data.sourceContainer.id == "componentMenu" && posId == "undefined")
           this.addComp(id, dropNum % 17, Math.floor(dropNum / 17));
         // if moved on sheet
         else this.updateComp(posId, dropNum % 17, Math.floor(dropNum / 17));
@@ -253,7 +270,7 @@ export class Sheet {
   async addComp(id, x, y) {
     let comp = c.Component.findById(id, this.menu);
     comp.respawn();
-    const newComp = new c.Component(comp.name, comp.width, comp.height, comp.items, id, null, comp.x, comp.y);
+    // const newComp = new c.Component(comp.name, comp.width, comp.height, comp.items, id, null, comp.x, comp.y);
     try {
       let query = await DataStore.save(
         new ComponentPosition({
@@ -263,8 +280,8 @@ export class Sheet {
           componentID: id,
         })
       );
-      newComp.posId = query.id;
-      this.sheet.push(newComp);
+      // newComp.posId = query.id;
+      // this.sheet.push(newComp);
       console.debug("ComponentPosition saved successfully", query.id);
     } catch (error) {
       console.debug("Error saving ComponentPosition", error);
@@ -273,8 +290,8 @@ export class Sheet {
 
   async updateComp(posId, x, y) {
     let comp = c.Component.findByPosId(posId, this.sheet);
-    comp.x = x;
-    comp.y = y;
+    // comp.x = x;
+    // comp.y = y;
     try {
       let query = await DataStore.query(ComponentPosition, posId);
       await DataStore.save(

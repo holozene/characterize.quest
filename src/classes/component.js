@@ -142,9 +142,13 @@ export class Input extends Item {
     );
     elem.setAttribute("type", this.type);
     if (this.type == "number") {
-      // elem.value = m.characterSheet.character[this.variable];
+      elem.value = s.Sheet.character.eval(this.variable);
       elem.setAttribute("inputmode", "numeric");
       elem.setAttribute("oninput", "this.value = this.value.replace(/[^0-9]/g, '');");
+    } else if (this.type == "checkbox") {
+      elem.checked = s.Sheet.character.eval(this.variable);
+    } else if (this.type == "text") {
+      elem.value = s.Sheet.character.eval(this.variable);
     }
     // else if (this.type == "text" && char.character[this.variable]) {
     //   elem.value = m.characterSheet.character[this.variable];
@@ -153,21 +157,19 @@ export class Input extends Item {
     // }
     elem.className = this.variable;
     elem.addEventListener("input", this.input);
-    elem.addEventListener("loadstart", this.input);
+    // elem.addEventListener("loadstart", this.input);
     // this.input();
     return elem;
   }
 
   async input() {
-    console.debug("input", s.Sheet.character);
+    // console.debug(this);
     try {
-      if (this.type == "checkbox") {
-        s.Sheet.character.setBool(this.className, this.checked);
-      } else {
-        s.Sheet.character.setVal(this.className, this.value);
-      }
+      if (this.type == "checkbox") s.Sheet.character.update(this.className, this.checked, this.type);
+      else s.Sheet.character.update(this.className, this.value, this.type);
+      console.debug("Input Taken", s.Sheet.character);
     } catch (error) {
-      console.debug("character was not loaded to take input", error)
+      console.debug("character was not loaded to take input", error);
     }
   }
 }
@@ -191,13 +193,10 @@ export class Output extends Item {
   async update() {
     console.debug("input", s.Sheet.character);
     try {
-      if (this.type == "checkbox") {
-        s.Sheet.character.evaluate(this.className);
-      } else {
-        s.Sheet.character.evaluate(this.className);
-      }
+      s.Sheet.character.evaluate(this.className);
+      console.debug("Character Update Made", s.Sheet.character);
     } catch (error) {
-      console.debug("character was not loaded to provide value", error)
+      console.debug("character was not loaded to provide value", error);
     }
   }
 }
