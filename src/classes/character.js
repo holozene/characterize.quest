@@ -62,7 +62,7 @@ export class Character {
     try {
       if (stringRef.indexOf("(") > -1)
         out = eval("this." + stringRef.match(/(.*?)\(/)[1] + "(" + stringRef.match(/\((.*?)\)/)[1] + ")");
-      else if (stringRef.indexOf("#") > -1)
+      else if (stringRef.indexOf("#") > -1) {
         if (stringRef.indexOf("=") > -1)
           // filter by string equality
           out = this[this.classNames.get(stringRef.match(/(.*?)#/)[1])].filter(i => {
@@ -73,13 +73,13 @@ export class Character {
           out = this[this.classNames.get(stringRef.match(/(.*?)#/)[1])].filter(i => {
             i[stringRef.match(/#(.*?)=/)[1]];
           })[Number(stringRef.match(/\[(\d+)\]/)[1])][stringRef.match(/\.(.*?)$/)[1]];
-      else if (stringRef.indexOf("[") > -1)
+      } else if (stringRef.indexOf("[") > -1)
         out =
           this[this.classNames.get(stringRef.match(/(.*?)\[/)[1])][Number(stringRef.match(/\[(\d+)\]/)[1])][
             stringRef.substring(stringRef.indexOf("."), stringRef.length)
           ];
       else out = this.c5e[stringRef];
-      console.debug(out, this.c5e);
+      // console.debug(out, this.c5e);
     } catch (error) {
       console.debug(
         error.name,
@@ -107,10 +107,11 @@ export class Character {
           Array.from(document.getElementsByClassName(stringRef)).forEach(elem => (elem.checked = value));
         } else if (type == "text") {
           this.c5e = Character5e.copyOf(this.c5e, updated => (updated[stringRef] = String(value)));
-          console.debug(
-            "Character5e.copyOf",
-            Character5e.copyOf(this.c5e, updated => (updated[stringRef] = String(value))), this.c5e
-          );
+          // console.debug(
+          //   "Character5e.copyOf",
+          //   Character5e.copyOf(this.c5e, updated => (updated[stringRef] = String(value))),
+          //   this.c5e
+          // );
           Array.from(document.getElementsByClassName(stringRef)).forEach(elem => (elem.value = value));
         } else if (type == "number") {
           this.c5e = Character5e.copyOf(this.c5e, updated => (updated[stringRef] = Number(value)));

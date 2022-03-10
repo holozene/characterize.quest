@@ -65,14 +65,23 @@ export class Sheet {
   characterSubscription() {
     const subscription = DataStore.observe(Character5e, this.id).subscribe(msg => {
       try {
-        console.debug("message", JSON.stringify(msg.element).match(/[{]"([^i][^"]*?|.[^d][^"]*?|i)":/)[1], msg.element);
-        const changedVarName = JSON.stringify(msg.element).match(/[{,]"([^i][^"]*?|.[^d][^"]*?|i)":/)[1];
+        const changedVarName =
+          JSON.stringify(msg.element).match(/[{]"([^i][^"]*?|.[^d][^"]*?|i)":/) == null
+            ? ""
+            : JSON.stringify(msg.element).match(/[{]"([^i][^"]*?|.[^d][^"]*?|i)":/)[1];
+        console.debug("message", msg.opType, changedVarName, msg.element);
+        Sheet.character.c5e = Character5e.copyOf(
+          Sheet.character.c5e,
+          updated => (updated[changedVarName] = msg.element[changedVarName])
+        );
         if (changedVarName == "inspiration") {
-          Sheet.character.c5e = msg.element;
-          Array.from(document.getElementsByClassName(changedVarName)).forEach(elem => (elem.checked = msg.element[changedVarName]));
+          Array.from(document.getElementsByClassName(changedVarName)).forEach(
+            elem => (elem.checked = msg.element[changedVarName])
+          );
         } else {
-          Sheet.character.c5e = Character5e.copyOf(Sheet.character.c5e, updated => (updated[changedVarName] = msg.element[changedVarName]));
-          Array.from(document.getElementsByClassName(changedVarName)).forEach(elem => (elem.value = msg.element[changedVarName]));
+          Array.from(document.getElementsByClassName(changedVarName)).forEach(
+            elem => (elem.value = msg.element[changedVarName])
+          );
         }
       } catch (error) {
         console.debug(error.name, "while syncing character changes:", error.message);
