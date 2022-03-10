@@ -16,6 +16,15 @@ export class Component {
     } else this.menuSpawn();
   }
 
+  setPos(x, y) {
+    if (this.x != x || this.y != y) {
+      this.x = x;
+      this.y = y;
+      document.getElementsByClassName(this.posId)[0].remove();
+      this.sheetSpawn();
+    }
+  }
+
   menuSpawn() {
     const component = this.generateComponent();
     const zone = this.genElemIC("div", "drop" + this.id, "dropzone menu-zone draggable-dropzone--occupied");
