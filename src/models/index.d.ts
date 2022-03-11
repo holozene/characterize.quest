@@ -72,6 +72,10 @@ type ComponentOutputMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type Class5eSkillMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 export declare class Character5e {
   readonly id: string;
   readonly charName?: string;
@@ -177,7 +181,7 @@ export declare class Class5e {
   readonly save1?: string;
   readonly save2?: string;
   readonly numSkills?: number;
-  readonly Skills?: (Skill | null)[];
+  readonly Skills?: (Class5eSkill | null)[];
   readonly Features?: (Feature | null)[];
   readonly Subclasses?: (Subclass | null)[];
   readonly createdAt?: string;
@@ -190,7 +194,7 @@ export declare class Skill {
   readonly id: string;
   readonly name?: string;
   readonly attribute?: string;
-  readonly classID: string;
+  readonly class5es?: (Class5eSkill | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Skill, SkillMetaData>);
@@ -323,4 +327,14 @@ export declare class ComponentOutput {
   readonly updatedAt?: string;
   constructor(init: ModelInit<ComponentOutput, ComponentOutputMetaData>);
   static copyOf(source: ComponentOutput, mutator: (draft: MutableModel<ComponentOutput, ComponentOutputMetaData>) => MutableModel<ComponentOutput, ComponentOutputMetaData> | void): ComponentOutput;
+}
+
+export declare class Class5eSkill {
+  readonly id: string;
+  readonly class5e: Class5e;
+  readonly skill: Skill;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<Class5eSkill, Class5eSkillMetaData>);
+  static copyOf(source: Class5eSkill, mutator: (draft: MutableModel<Class5eSkill, Class5eSkillMetaData>) => MutableModel<Class5eSkill, Class5eSkillMetaData> | void): Class5eSkill;
 }
