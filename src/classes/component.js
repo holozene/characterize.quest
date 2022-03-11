@@ -176,7 +176,7 @@ export class Input extends Item {
 
 export class Output extends Item {
   constructor(x, y, width, height, variable, style) {
-    super(x, y, width, height, undefined, "", style);
+    super(x, y, width, height, undefined, style);
     this.variable = variable;
   }
 
