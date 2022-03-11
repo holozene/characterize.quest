@@ -854,14 +854,14 @@ export const schema = {
                     "name": "Skills",
                     "isArray": true,
                     "type": {
-                        "model": "Skill"
+                        "model": "Class5eSkill"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "classID"
+                        "associatedWith": "class5e"
                     }
                 },
                 "Features": {
@@ -958,12 +958,19 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "classID": {
-                    "name": "classID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
+                "class5es": {
+                    "name": "class5es",
+                    "isArray": true,
+                    "type": {
+                        "model": "Class5eSkill"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "skill"
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -988,15 +995,6 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byClass5e",
-                        "fields": [
-                            "classID"
-                        ]
-                    }
                 },
                 {
                     "type": "auth",
@@ -1984,9 +1982,71 @@ export const schema = {
                     }
                 }
             ]
+        },
+        "Class5eSkill": {
+            "name": "Class5eSkill",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "class5e": {
+                    "name": "class5e",
+                    "isArray": false,
+                    "type": {
+                        "model": "Class5e"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "class5eID"
+                    }
+                },
+                "skill": {
+                    "name": "skill",
+                    "isArray": false,
+                    "type": {
+                        "model": "Skill"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "skillID"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Class5eSkills",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                }
+            ]
         }
     },
     "enums": {},
     "nonModels": {},
-    "version": "17d6a0e718f2960fe1ad26c600c92e47"
+    "version": "476931d1a6b264517924390b4126ad50"
 };

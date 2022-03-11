@@ -4,7 +4,7 @@ import { schema } from './schema';
 
 
 
-const { Character5e, ClassLevel, SkillScore, Feature, Equipment, ComponentPosition, Class5e, Skill, Subclass, Spell, Item, Fluency, Language, Component, ComponentItem, ComponentInput, ComponentOutput } = initSchema(schema);
+const { Character5e, ClassLevel, SkillScore, Feature, Equipment, ComponentPosition, Class5e, Skill, Subclass, Spell, Item, Fluency, Language, Component, ComponentItem, ComponentInput, ComponentOutput, Class5eSkill } = initSchema(schema);
 
 export {
   Character5e,
@@ -23,5 +23,6 @@ export {
   Component,
   ComponentItem,
   ComponentInput,
-  ComponentOutput
+  ComponentOutput,
+  Class5eSkill
 };

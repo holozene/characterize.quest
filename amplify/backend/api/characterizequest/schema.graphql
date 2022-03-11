@@ -18,18 +18,12 @@ type Character5e @model @auth(rules: [{allow: public}]) {
   exhaustion: Int
   notes: String
   race: String
-  # raceID: [ClassLevel] @index(name: "byCharacter5e", fields: ["id"])
   ClassLevels: [ClassLevel] @hasMany(indexName: "byCharacter5e", fields: ["id"])
   SkillScores: [SkillScore] @hasMany(indexName: "byCharacter5e", fields: ["id"])
   Feats: [Feature] @hasMany(indexName: "byCharacter5e", fields: ["id"])
   Equipment: [Equipment] @hasMany(indexName: "byCharacter5e", fields: ["id"])
   ComponentPositions: [ComponentPosition] @hasMany(indexName: "byCharacter5e", fields: ["id"])
 }
-
-# type Race @model @auth(rules: [{allow: public}]) {
-#   id: ID!
-#   name: String
-# }
 
 type ClassLevel @model @auth(rules: [{allow: public}]) {
   id: ID!
@@ -47,7 +41,7 @@ type Class5e @model @auth(rules: [{allow: public}]) {
   save1: String
   save2: String
   numSkills: Int
-  Skills: [Skill] @hasMany(indexName: "byClass5e", fields: ["id"])
+  Skills: [Skill] @manyToMany(relationName: "Class5eSkill")
   Features: [Feature] @hasMany(indexName: "byClass5e", fields: ["id"])
   Subclasses: [Subclass] @hasMany(indexName: "byClass5e", fields: ["id"])
 }
@@ -102,7 +96,7 @@ type Skill @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
   attribute: String
-  classID: ID! @index(name: "byClass5e")
+  class5es: [Class5e] @manyToMany(relationName: "Class5eSkill")
 }
 
 type Equipment @model @auth(rules: [{allow: public}]) {
